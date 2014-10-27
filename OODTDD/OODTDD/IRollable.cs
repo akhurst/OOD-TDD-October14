@@ -8,6 +8,7 @@ namespace OODTDD
 {
     public interface IRollable
     {
+        int LastValue { get; }
         int Roll();
     }
 }

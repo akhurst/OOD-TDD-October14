@@ -10,10 +10,10 @@ namespace OODTDD
         public int Roll()
         {
             var value = new Random().Next(1, 7);
-            FaceValue = value;
+            LastValue = value;
             return value;
         }
 
-        public int FaceValue { get; private set; }
+        public int LastValue { get; private set; }
     }
 }

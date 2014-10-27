@@ -14,8 +14,14 @@ namespace OODTDD
                 throw new ArgumentException();
             }
 
-            InitializePlayers(numPlayers);
             InitializeBoard();
+            InitializeDice();
+            InitializePlayers(numPlayers);
+        }
+
+        private void InitializeDice()
+        {
+            Cup = new Cup(2);
         }
 
         private void InitializeBoard()
@@ -29,11 +35,14 @@ namespace OODTDD
 
             for (int i = 0; i < numPlayers; i++)
             {
-                Players.Add(new Player("Player " + i));
+                var player = new Player("Player " + i);
+                Players.Add(player);
+                player.CurrentSquare = Board.FirstSquare;
             }
         }
 
         public IList<Player> Players { get; set; }
         public Board Board { get; set; }
+        public Cup Cup { get; set; }
     }
 }

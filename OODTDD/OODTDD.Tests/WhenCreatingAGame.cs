@@ -50,5 +50,24 @@ namespace OODTDD.Tests
         {
             Assert.Throws<ArgumentException>(() => new Game(11));
         }
+
+        [Test]
+        public void ThenTheGameHasTwoDice()
+        {
+            var game = new Game(4);
+
+            game.Cup.NumDie.Should().Be(2);
+            game.Cup.Dice.Should().OnlyHaveUniqueItems();
+        }
+
+        [Test]
+        public void ThenEveryPlayerStartsOnTheFirstSquare()
+        {
+            var game = new Game(4);
+
+            Assert.IsFalse(game.Players.Any(p => p.CurrentSquare == null));
+            Assert.That(game.Players.Select(p => p.CurrentSquare).Distinct().Count(), Is.EqualTo(1));
+
+        }
     }
 }

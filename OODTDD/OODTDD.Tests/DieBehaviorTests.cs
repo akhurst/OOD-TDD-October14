@@ -16,7 +16,7 @@ namespace OODTDD.Tests
 
             var rollResult = die.Roll();
 
-            var faceValue = die.FaceValue;
+            var faceValue = die.LastValue;
 
             Assert.That(rollResult, Is.EqualTo(faceValue));
         }

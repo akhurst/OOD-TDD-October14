@@ -13,5 +13,6 @@ namespace OODTDD
         }
 
         public string Token { get; private set; }
+        public Square CurrentSquare { get; set; }
     }
 }

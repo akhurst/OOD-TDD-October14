@@ -23,5 +23,10 @@ namespace OODTDD
         }
 
         public IList<Square> Squares { get; set; }
+
+        public Square FirstSquare
+        {
+            get { return Squares[0]; }
+        }
     }
 }
