@@ -71,7 +71,7 @@ namespace OODTDD.Tests
         [Test]
         public void TwoPlayersTakeTheirMoves()
         {
-            var startSquare = game.Board
+            var startSquare = game.Board.GetStartingSquare();
             game.RollAndMove(player1);
             //game.EndTurn(player1);
             game.RollAndMove(player2);
@@ -104,13 +104,7 @@ namespace OODTDD.Tests
             Assert.IsInstanceOf<Square>(square);
         }
 
-        public void CurrentPlayerRollsAndMoves()
-        {
-
-            game.RollAndMove(player1);
-
-        }
-
+        [Test]
         public void GameStateIsFinished()
         {
 

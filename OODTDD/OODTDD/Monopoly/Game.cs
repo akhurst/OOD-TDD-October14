@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OODTDD.Monopoly
 {
@@ -20,11 +21,17 @@ namespace OODTDD.Monopoly
             this.Board.MoveToken(player1.Token, roll);
         }
 
+        public bool PassedGo(IEnumerable<Square> passedSquares )
+        {
+            return passedSquares.Contains(Board.GetStartingSquare());
+        }
+
 
     }
 
     public enum GameState
     {
+        Active,
         Finished
     }
 }
