@@ -10,15 +10,25 @@ namespace OODTDD
     {
         public static IRollable GetSingleDie()
         {
-            return new Die();
+            return GetSingleDie(new RandomAdapter());
+        }
+
+        public static IRollable GetSingleDie(IRandomizer randomizer)
+        {
+            return new Die(randomizer);
         }
 
         public static IList<IRollable> GetDie(int numDie)
         {
+            return GetDie(numDie, new RandomAdapter());
+        }
+
+        public static IList<IRollable> GetDie(int numDie, IRandomizer randomizer)
+        {
             var dice = new List<IRollable>();
             for (var i = 0; i < numDie; i++)
             {
-                dice.Add(GetSingleDie());
+                dice.Add(GetSingleDie(randomizer));
             }
             return dice;
         }
