@@ -32,9 +32,12 @@ namespace OODTDD.Monopoly
         {
             RollAndMove(CurrentPlayer.Value);
 
+            if (Players.Any(x => x.Money >= 1000))
+                this.GameState = GameState.Finished;
+
             if (cup.LastValue.Max() != cup.LastValue.Min())
             {
-                CurrentPlayer = CurrentPlayer.Next;
+                CurrentPlayer = CurrentPlayer.CircularNext();
             }
         }
     }

@@ -68,17 +68,28 @@ namespace OODTDD.Monopoly
         public override IEnumerable<IGameEvent> Pass(Token token)
         {
             var events = new List<IGameEvent>();
-            events.Add(new WinCondition(token));
+            events.Add(new GetMoneyEvent(token, 200));
 
             return events;
         }
+    }
 
-        public override IEnumerable<IGameEvent> Land(Token token)
+    public class GetMoneyEvent : IGameEvent
+    {
+        private Token _token;
+        private int _money;
+
+        public GetMoneyEvent(Token token, int money)
         {
-            var events = new List<IGameEvent>();
-            events.Add(new WinCondition(token));
+            _token = token;
+            _money = money;
+        }
 
-            return events;
+        public void InvokeEvent(Game game)
+        {
+            var player = game.Players.FirstOrDefault(x => x.Token == _token);
+
+            player.Money += _money;
         }
     }
 

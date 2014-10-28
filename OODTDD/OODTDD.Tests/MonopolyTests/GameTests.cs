@@ -109,21 +109,26 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void GameStateIsFinished()
+        public void PlayerGotMoney()
         {
 
-            while (finishedGame.GameState != GameState.Finished)
+            while (finishedGame.Players.Any(x => x.Money == 0))
             {
-                //finishedGame.TakeTurn();
-
-
-                foreach (Player p in finishedGame.Players)
-                {
-                    finishedGame.RollAndMove(p);
-                }
+                finishedGame.TakeTurn();
             }
 
-            Assert.AreEqual(finishedGame.GameState, GameState.Finished);
+            Assert.AreNotEqual(finishedGame.GameState, GameState.Finished);
+        }
+
+        [Test]
+        public void PlayersMoneyIncreasesWhenPassingGo()
+        {
+            while (finishedGame.GameState != GameState.Finished)
+            {
+                finishedGame.TakeTurn();
+            }
+
+            Assert.GreaterOrEqual(finishedGame.Players.Max(x => x.Money), 1000);
         }
 
         [Test]
