@@ -98,10 +98,10 @@ namespace OODTDD.Tests
         [Test]
         public void StartingSquareExistsOnBoard()
         {
-            Square square = game.Board.GetStartingSquare();
+            ISquare square = game.Board.GetStartingSquare();
             Assert.IsNotNull(square);
 
-            Assert.IsInstanceOf<Square>(square);
+            Assert.IsInstanceOf<ISquare>(square);
         }
 
         [Test]
@@ -112,13 +112,13 @@ namespace OODTDD.Tests
             //{
             //var nextRound = game.TakeRound();
 
-            while (game.GameState != GameState.Finished)
-            {
-                foreach (Player p in game.Players)
-                {
-                    game.RollAndMove(p);
-                }
-            }
+            //while (game.GameState != GameState.Finished)
+            //{
+            //    foreach (Player p in game.Players)
+            //    {
+            //        game.RollAndMove(p);
+            //    }
+            //}
 
 
             Assert.Equals(finishedGame.GameState, GameState.Finished);

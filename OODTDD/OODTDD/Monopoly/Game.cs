@@ -21,7 +21,7 @@ namespace OODTDD.Monopoly
             this.Board.MoveToken(player1.Token, roll);
         }
 
-        public bool PassedGo(IEnumerable<Square> passedSquares )
+        public bool PassedGo(IEnumerable<ISquare> passedSquares )
         {
             return passedSquares.Contains(Board.GetStartingSquare());
         }

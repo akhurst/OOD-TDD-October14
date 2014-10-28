@@ -5,34 +5,47 @@ namespace OODTDD.Monopoly
 {
     public class Board
     {
-        public LinkedList<Square> Squares { get; set; }
+        public LinkedList<ISquare> Squares { get; set; }
 
         public void MoveToken(Token token, int spaces)
         {
-            var startQuare = this.Squares.FirstOrDefault(x => x.HasToken(token));
-            
-            int indexOf = this.Squares.First.Next;
+            var startSquare = this.Squares.FirstOrDefault(x => x.HasToken(token));
+            var currentNode = Squares.Find(startSquare);
+            startSquare.RemoveToken(token);
 
-            startQuare.RemoveToken(token);
+           
 
-            var endSquare = this.Squares[indexOf + spaces];
+            var endSquare = currentNode.Value;
+
+            endSquare.Land(token);
             endSquare.AddToken(token);
         }
 
-        public Square GetStartingSquare()
+        public ISquare GetStartingSquare()
         {
             return this.Squares.FirstOrDefault();
         }
 
-        public Square GetTokenSquare(Token token)
+        public ISquare GetTokenSquare(Token token)
         {
             return this.Squares.FirstOrDefault(x => x.HasToken(token));
         }
 
-        public IEnumerable<Square> GetNextSquares(Token token, int i)
+        public IEnumerable<ISquare> GetNextSquares(Token token, int spaces)
         {
-            var squareList = new List<Square>();
-            int startingIndex = Squares.IndexOf(GetTokenSquare(token));
+            var squareList = new List<ISquare>();
+            var startingSquare = Squares.Find(GetTokenSquare(token));
+
+            var currentNode = startingSquare;
+
+            for (int i = 0; i <= spaces; i++)
+            {
+                currentNode = currentNode.Next;
+                currentNode.Value.Pass(token);
+                squareList.Add(currentNode.Value);
+            }
+
+            return squareList;
         }
     }
 }
