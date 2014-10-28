@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using NUnit.Framework;
 
 namespace OODTDD.Tests
@@ -128,15 +129,7 @@ namespace OODTDD.Tests
     {
         public Board Board { get; set; }
         public IEnumerable<Player> Players { get; set; }
-        IRollable cup = new Cup(2);
-        //public void RollDice(Player p)
-        //{
-        //    //random roll
-
-        //    MovePlayer(int roll);
-
-        //}
-       
+        Cup cup = new Cup(2);
 
         public void RollAndMove(Player player1)
         {
