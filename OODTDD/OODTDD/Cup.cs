@@ -14,14 +14,19 @@ namespace OODTDD
             Dice = RollableFactory.GetDie(numDie);
         }
 
+        public Cup(): this(2)
+        {
+            
+        }
+
         public int NumDie { get; set; }
 
-        public int LastValue { get; private set; }
+        public virtual List<int> LastValue { get; private set; }
 
-        public int Roll()
+        public virtual int Roll()
         {
-            LastValue = Dice.Sum(die => die.Roll());
-            return LastValue;
+            LastValue = Dice.Select(die => die.Roll()).ToList();
+            return LastValue.Sum();
         }
     }
 }

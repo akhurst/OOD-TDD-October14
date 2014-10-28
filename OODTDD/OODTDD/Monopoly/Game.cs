@@ -7,7 +7,7 @@ namespace OODTDD.Monopoly
     {
         public Board Board { get; set; }
         public LinkedList<Player> Players { get; set; }
-        private Cup cup = new Cup(2);
+        public Cup cup = new Cup(2);
         public GameState GameState;
         public LinkedListNode<Player> CurrentPlayer { get; set; } 
         
@@ -30,7 +30,12 @@ namespace OODTDD.Monopoly
 
         public void TakeTurn()
         {
-            
+            RollAndMove(CurrentPlayer.Value);
+
+            if (cup.LastValue.Max() != cup.LastValue.Min())
+            {
+                CurrentPlayer = CurrentPlayer.Next;
+            }
         }
     }
 

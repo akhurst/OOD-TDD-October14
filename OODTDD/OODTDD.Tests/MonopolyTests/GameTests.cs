@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
 using NUnit.Framework;
+using NSubstitute;
 using OODTDD.Monopoly;
 
 namespace OODTDD.Tests
@@ -17,6 +18,7 @@ namespace OODTDD.Tests
         private Token topHat;
         private Player player1;
         private Player player2;
+        private Cup doublesCup = new Cup(2);
 
         [TestFixtureSetUp]
         public virtual void SetUp()
@@ -30,6 +32,8 @@ namespace OODTDD.Tests
             game = MonopolyGame.GetGame(new List<Player>{player1, player2});
 
             finishedGame = MonopolyGame.GetGame(new List<Player> {player1, player2});
+
+            doublesCup = Substitute.For<Cup>();
         }
 
         [Test]
@@ -125,13 +129,17 @@ namespace OODTDD.Tests
         [Test]
         public void PlayerRollsDoublesAndGetsAnotherTurn()
         {
+            doublesCup.Roll().Returns(12);
+            doublesCup.LastValue.Returns(new List<int>(){6,6});
+            
+            game.cup = doublesCup;
             var p = game.CurrentPlayer;
             game.TakeTurn();
             Assert.AreEqual(game.CurrentPlayer, p);
         }
 
             
-        }
+    }
 
         
 }
