@@ -9,16 +9,14 @@ namespace OODTDD.Monopoly
         public LinkedList<Player> Players { get; set; }
         private Cup cup = new Cup(2);
         public GameState GameState;
-
-        public int currentPlayerIndex;
-
+        public LinkedListNode<Player> CurrentPlayer { get; set; } 
+        
         public void RollAndMove(Player player1)
         {
             var roll = cup.Roll();
 
             //Roll conditions
             var events = this.Board.MoveToken(player1.Token, roll);
-
             foreach (IGameEvent e in events)
             {
                 e.InvokeEvent(this);
