@@ -8,6 +8,8 @@ namespace OODTDD.Monopoly
         public IEnumerable<Player> Players { get; set; }
         private Cup cup = new Cup(2);
 
+        public GameState gameState;
+
         public void RollAndMove(Player player1)
         {
             var roll = cup.Roll();
@@ -16,5 +18,9 @@ namespace OODTDD.Monopoly
 
             this.Board.MoveToken(player1.Token, roll);
         }
+    }
+
+    public enum GameState
+    {
     }
 }
