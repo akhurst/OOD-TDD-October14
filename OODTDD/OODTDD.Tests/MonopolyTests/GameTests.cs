@@ -120,12 +120,20 @@ namespace OODTDD.Tests
             }
 
             Assert.AreEqual(finishedGame.GameState, GameState.Finished);
-            }
+        }
+
+        [Test]
+        public void PlayerRollsDoublesAndGetsAnotherTurn()
+        {
+            var p = game.CurrentPlayer;
+            game.TakeTurn();
+            Assert.AreEqual(game.CurrentPlayer, p);
+        }
 
             
         }
 
-
-    }
+        
+}
 
    
