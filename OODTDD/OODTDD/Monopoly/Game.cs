@@ -9,7 +9,9 @@ namespace OODTDD.Monopoly
         public LinkedList<Player> Players { get; set; }
         public Cup cup = new Cup(2);
         public GameState GameState;
-        public LinkedListNode<Player> CurrentPlayer { get; set; } 
+        public LinkedListNode<Player> CurrentPlayer { get; set; }
+        private int _times;
+        public IEnumerable<IWinCondition> WinConditions { get; set; } 
         
         public void RollAndMove(Player player1)
         {
@@ -17,9 +19,26 @@ namespace OODTDD.Monopoly
 
             //Roll conditions
             var events = this.Board.MoveToken(player1.Token, roll);
+
+            InvokeEvents(events);
+        }
+
+        private void InvokeEvents(IEnumerable<IGameEvent> events)
+        {
             foreach (IGameEvent e in events)
             {
                 e.InvokeEvent(this);
+                TestWinConditions();
+                if (GameState == GameState.Finished)
+                    break;
+            }
+        }
+
+        private void TestWinConditions()
+        {
+            if (WinConditions.Any(x => x.IsWinCondition(this)))
+            {
+                this.GameState = GameState.Finished;
             }
         }
 
@@ -31,16 +50,26 @@ namespace OODTDD.Monopoly
         public void TakeTurn()
         {
             RollAndMove(CurrentPlayer.Value);
+            
+            _times++;
 
-            if (Players.Any(x => x.Money >= 1000))
-                this.GameState = GameState.Finished;
-
-            if (cup.LastValue.Max() != cup.LastValue.Min())
+            if (cup.LastValue.Max() == cup.LastValue.Min())
             {
+                if (_times <= 2)
                 CurrentPlayer = CurrentPlayer.CircularNext();
+                _times = 0;
             }
         }
     }
+
+
+    //pay money
+
+
+    //buy properties
+
+
+    //pay rent
 
     public enum GameState
     {

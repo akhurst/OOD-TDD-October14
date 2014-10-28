@@ -18,6 +18,8 @@ namespace OODTDD.Monopoly
             var game = new Game {Players = playerList, };
             game.CurrentPlayer = game.Players.First;
 
+            game.WinConditions = new List<IWinCondition>{ new MoreThanOneThousandWinCondition()};
+
             List<ISquare> squares = new List<ISquare>();
             squares.Add(new GoSquare());
             foreach (var o in Enumerable.Range(1, 35))

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using OODTDD;
@@ -74,6 +75,22 @@ namespace OODTDD.Monopoly
         }
     }
 
+    public class IncomTaxSquare : AbstractSquare
+    {
+        public override IEnumerable<IGameEvent> Land(Token token)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class LuxuryTaxSquare : AbstractSquare
+    {
+        public override IEnumerable<IGameEvent> Land(Token token)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class GetMoneyEvent : IGameEvent
     {
         private Token _token;
@@ -93,17 +110,36 @@ namespace OODTDD.Monopoly
         }
     }
 
-    public class WinCondition : IGameEvent
+    public class PayIncomeTax : IGameEvent
     {
-        private Token _winningPlayer;
-        public WinCondition(Token token)
-        {
-            _winningPlayer = token;
-        }
-
         public void InvokeEvent(Game game)
         {
-            game.GameState = GameState.Finished;
+            throw new System.NotImplementedException();
         }
+    }
+
+    public class PayRent : IGameEvent
+    {
+        public void InvokeEvent(Game game)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    public class MoreThanOneThousandWinCondition : IWinCondition
+    {
+        public bool IsWinCondition(Game game)
+        {
+            WinningPlayer = game.Players.OrderByDescending(x => x.Money).FirstOrDefault(x => x.Money >= 1000);
+            return WinningPlayer != null;
+        }
+
+        public Player WinningPlayer { get; private set; }
+    }
+
+    public interface IWinCondition
+    {
+        bool IsWinCondition(Game game);
+        Player WinningPlayer { get; }
     }
 }

@@ -138,9 +138,20 @@ namespace OODTDD.Tests
             doublesCup.LastValue.Returns(new List<int>(){6,6});
             
             game.cup = doublesCup;
-            var p = game.CurrentPlayer;
+            var p = game.CurrentPlayer.Value;
             game.TakeTurn();
-            Assert.AreEqual(game.CurrentPlayer, p);
+
+            Assert.AreEqual(game.CurrentPlayer.Value, p);
+            game.TakeTurn();
+
+            Assert.AreEqual(game.CurrentPlayer.Value, p);
+            game.TakeTurn();
+
+            Assert.AreEqual(game.CurrentPlayer.Value, p);
+            game.TakeTurn();
+
+            Assert.AreNotEqual(game.CurrentPlayer.Value, p);
+
         }
 
             
