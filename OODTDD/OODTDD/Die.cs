@@ -7,9 +7,10 @@ namespace OODTDD
 {
     public class Die : IRollable
     {
+        readonly Random random = new Random();
         public int Roll()
         {
-            var value = new Random().Next(1, 7);
+            var value = random.Next(1, 7);
             LastValue = value;
             return value;
         }

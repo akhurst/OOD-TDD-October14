@@ -35,14 +35,21 @@ namespace OODTDD
 
             for (int i = 0; i < numPlayers; i++)
             {
-                var player = new Player("Player " + i);
+                var player = new Player("Player " + i, Board.FirstSquare);
                 Players.Add(player);
-                player.CurrentSquare = Board.FirstSquare;
             }
         }
 
         public IList<Player> Players { get; set; }
         public Board Board { get; set; }
         public Cup Cup { get; set; }
+
+        public void PlayRound()
+        {
+            foreach (var player in Players)
+            {
+                player.TakeTurn(Cup);
+            }
+        }
     }
 }
