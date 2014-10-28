@@ -7,10 +7,21 @@ namespace OODTDD
 {
     public class Die : IRollable
     {
-        readonly Random random = new Random();
+        public Die()
+        {
+            randomizer = new RandomAdapter();
+        }
+
+        public Die(IRandomizer randomizer)
+        {
+            this.randomizer = randomizer;
+        }
+
+        private readonly IRandomizer randomizer;
+
         public int Roll()
         {
-            var value = random.Next(1, 7);
+            var value = randomizer.GetRandomNumber(1,6);
             LastValue = value;
             return value;
         }

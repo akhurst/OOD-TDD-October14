@@ -35,7 +35,7 @@ namespace OODTDD.Tests
         {
             for (int i = 2; i <= 12; i++)
             {
-                Assert.IsTrue(results.Any(r => r == i), i + " not found");
+                Assert.IsTrue(results.Contains(i), i + " not found");
             }
         }
     }
