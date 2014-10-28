@@ -7,13 +7,26 @@ namespace OODTDD
 {
     public class Die : IRollable
     {
+        private readonly IRandomizer randomizer;
+        public Die()
+        {
+            randomizer = new RandomNumberAdapter();
+        }
+
+        public Die(IRandomizer randomizer)
+        {
+            this.randomizer = randomizer;
+        }
+
+
+
         public int Roll()
         {
-            var value = new Random().Next(1, 7);
-            FaceValue = value;
+            var value = randomizer.GetRandomNumber(1, 6);
+            LastValue = value;
             return value;
         }
 
-        public int FaceValue { get; private set; }
+        public int LastValue { get; private set; }
     }
 }

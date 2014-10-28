@@ -10,11 +10,14 @@ namespace OODTDD
     {
         public static IRollable GetSingleDie()
         {
+            
             return new Die();
         }
 
         public static IList<IRollable> GetDie(int numDie)
         {
+            Random _rand = new Random();
+
             var dice = new List<IRollable>();
             for (var i = 0; i < numDie; i++)
             {

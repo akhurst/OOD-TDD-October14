@@ -7,15 +7,21 @@ namespace OODTDD
 {
     public class Cup : IRollable
     {
-        private readonly IList<IRollable> dice; 
+        public IList<IRollable> Dice { get; private set; }
         public Cup(int numDie)
         {
-            dice = RollableFactory.GetDie(numDie);
+            NumDie = numDie;
+            Dice = RollableFactory.GetDie(numDie);
         }
+
+        public int NumDie { get; set; }
+
+        public int LastValue { get; private set; }
 
         public int Roll()
         {
-            return dice.Sum(die => die.Roll());
+            LastValue = Dice.Sum(die => die.Roll());
+            return LastValue;
         }
     }
 }
