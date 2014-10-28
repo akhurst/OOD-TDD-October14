@@ -19,7 +19,7 @@ namespace OODTDD.Monopoly
             endSquare.AddToken(token);
         }
 
-        public Square StartingSquare()
+        public Square GetStartingSquare()
         {
             return this.Squares.FirstOrDefault();
         }
