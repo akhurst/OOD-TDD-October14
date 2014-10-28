@@ -18,8 +18,8 @@ namespace OODTDD.Tests
         [TestFixtureSetUp]
         public virtual void SetUp()
         {
-            this.horsey = new Token {Name = "Horsey"};
-            this.topHat = new Token {Name = "TopHat"};
+            this.horsey = new Token {Name = TokenType.Horsey};
+            this.topHat = new Token {Name = TokenType.TopHat};
 
             this.player1 = new Player {Token = horsey};
             this.player2 = new Player() {Token = topHat};
@@ -60,8 +60,8 @@ namespace OODTDD.Tests
         public void TooFewOrTooManyPlayersThrowException()
         {
             Player p = new Player{ Token = new Token()};
-            Assert.Throws<Exception>(() => Monopoly.GetGame(new List<Player>{ p }));
-            Assert.Throws<Exception>(() => Monopoly.GetGame(new List<Player>{ p,p,p,p,p,p,p,p,p,p,p,p,p}));
+            Assert.Throws<ArgumentException>(() => Monopoly.GetGame(new List<Player>{ p }));
+            Assert.Throws<ArgumentException>(() => Monopoly.GetGame(new List<Player>{ p,p,p,p,p,p,p,p,p,p,p,p,p}));
         }
         [Test]
         public void TwoPlayersTakeTheirMoves()
@@ -93,27 +93,27 @@ namespace OODTDD.Tests
 
     public class Token
     {
-        public string Name { get; set; }
+        public TokenType Name { get; set; }
     }
 
     public class Monopoly
     {
         public static Game GetGame(IEnumerable<Player> players)
         {
-            var enumerable = players as IList<Player> ?? players.ToList();
-            if (enumerable.Count() < 2 || enumerable.Count() > 10)
+            var playerList = players as IList<Player> ?? players.ToList();
+            if (playerList.Count() < 2 || playerList.Count() > 10)
             {
-                throw new Exception("Too many or few players");
+                throw new ArgumentException("Too many or few players");
             }
 
-            var game = new Game {Players = enumerable};
+            var game = new Game {Players = playerList};
 
             var board = new Board {Squares = Enumerable.Range(1, 36).Select(x => new Square()).ToList()};
 
             game.Board = board;
 
             var startingSquare = game.Board.Squares.FirstOrDefault();
-            foreach (var p in enumerable)
+            foreach (var p in playerList)
             {
                 startingSquare.AddToken(p.Token);
             }
@@ -128,7 +128,7 @@ namespace OODTDD.Tests
     {
         public Board Board { get; set; }
         public IEnumerable<Player> Players { get; set; }
-        Cup cup = new Cup(2);
+        IRollable cup = new Cup(2);
         //public void RollDice(Player p)
         //{
         //    //random roll
@@ -136,22 +136,15 @@ namespace OODTDD.Tests
         //    MovePlayer(int roll);
 
         //}
-        
-
-        public void MoveToken(Token token, int spaces)
-        {
-            var startQuare = this.Board.Squares.FirstOrDefault(x => x.HasToken(token));
-            int indexOf = this.Board.Squares.IndexOf(startQuare);
-
-            startQuare.RemoveToken(token);
-
-            var endSquare = this.Board.Squares[indexOf + spaces];
-            endSquare.AddToken(token);
-        }
+       
 
         public void RollAndMove(Player player1)
         {
-            this.MoveToken(player1.Token, cup.Roll());
+            var roll = cup.Roll();
+
+            //Roll conditions
+
+            this.Board.MoveToken(player1.Token, roll);
         }
     }
 
@@ -160,9 +153,34 @@ namespace OODTDD.Tests
         public Token Token { get; set; }
     }
 
+    public enum TokenType
+    {
+        Wheelbarrow,
+        Battleship,
+        Racecar,
+        Thimble,
+        Boot,
+        Dog,
+        TopHat,
+        Horsey,
+        Iron,
+        Cannon
+    }
+
     public class Board
     {
         public List<Square> Squares { get; set; }
+
+        public void MoveToken(Token token, int spaces)
+        {
+            var startQuare = this.Squares.FirstOrDefault(x => x.HasToken(token));
+            int indexOf = this.Squares.IndexOf(startQuare);
+            
+            startQuare.RemoveToken(token);
+
+            var endSquare = this.Squares[indexOf + spaces];
+            endSquare.AddToken(token);
+        }
     }
 
     public class Square
