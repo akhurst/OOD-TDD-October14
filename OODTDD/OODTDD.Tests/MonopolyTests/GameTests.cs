@@ -91,6 +91,15 @@ namespace OODTDD.Tests
 
             Assert.IsNotNull(game.Board.Squares.SingleOrDefault(x => x.HasToken(horsey)));
         }
+
+        [Test]
+        public void StartingSquareExistsOnBoard()
+        {
+            Square square = game.Board.GetStartingSquare();
+            Assert.IsNotNull(square);
+
+            Assert.IsInstanceOf<Square>(square);
+        }
     }
 
    
