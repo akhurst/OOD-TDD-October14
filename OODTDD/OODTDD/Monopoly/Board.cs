@@ -13,12 +13,16 @@ namespace OODTDD.Monopoly
             var currentNode = Squares.Find(startSquare);
             startSquare.RemoveToken(token);
 
-           
+            var lastSquare = startSquare;
+            foreach (var square in GetNextSquares(startSquare, spaces))
+            {
+                square.Pass(token);
+                lastSquare = square;
+            }
 
-            var endSquare = currentNode.Value;
-
-            endSquare.Land(token);
-            endSquare.AddToken(token);
+            lastSquare.Land(token);
+            
+            lastSquare.AddToken(token);
         }
 
         public ISquare GetStartingSquare()
@@ -31,17 +35,16 @@ namespace OODTDD.Monopoly
             return this.Squares.FirstOrDefault(x => x.HasToken(token));
         }
 
-        public IEnumerable<ISquare> GetNextSquares(Token token, int spaces)
+        public IEnumerable<ISquare> GetNextSquares(ISquare square, int spaces)
         {
             var squareList = new List<ISquare>();
-            var startingSquare = Squares.Find(GetTokenSquare(token));
+            var startingSquare = Squares.Find(square);
 
             var currentNode = startingSquare;
 
             for (int i = 0; i <= spaces; i++)
             {
                 currentNode = currentNode.Next;
-                currentNode.Value.Pass(token);
                 squareList.Add(currentNode.Value);
             }
 
