@@ -43,9 +43,12 @@
     <Compile Include="Cup.cs" />
     <Compile Include="Die.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameOverException.cs" />
+    <Compile Include="GoSquare.cs" />
     <Compile Include="IRandomizer.cs" />
     <Compile Include="IRollable.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerPassedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomAdapter.cs" />
     <Compile Include="RollableFactory.cs" />

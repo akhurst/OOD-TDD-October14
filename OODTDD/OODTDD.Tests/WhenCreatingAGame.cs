@@ -69,5 +69,14 @@ namespace OODTDD.Tests
             Assert.That(game.Players.Select(p => p.CurrentSquare).Distinct().Count(), Is.EqualTo(1));
 
         }
+
+        [Test]
+        public void ThenThereIsNoWinner()
+        {
+            var game = new Game(4);
+
+            game.Winner.Should().BeNull();
+            game.IsOver.Should().BeFalse();
+        }
     }
 }

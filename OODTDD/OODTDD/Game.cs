@@ -27,6 +27,12 @@ namespace OODTDD
         private void InitializeBoard()
         {
             Board = new Board();
+            Board.GoSquare.PlayerPassed += GoSquare_PlayerPassed;
+        }
+
+        void GoSquare_PlayerPassed(object sender, PlayerPassedEventArgs e)
+        {
+            Winner = e.Player;
         }
 
         private void InitializePlayers(int numPlayers)
@@ -35,7 +41,7 @@ namespace OODTDD
 
             for (int i = 0; i < numPlayers; i++)
             {
-                var player = new Player("Player " + i, Board.FirstSquare);
+                var player = new Player("Player " + i, Board.GoSquare);
                 Players.Add(player);
             }
         }
@@ -43,12 +49,18 @@ namespace OODTDD
         public IList<Player> Players { get; set; }
         public Board Board { get; set; }
         public Cup Cup { get; set; }
+        public bool IsOver { get { return Winner != null; } }
+        public Player Winner { get; set; }
 
         public void PlayRound()
         {
+            if(IsOver)
+                throw new GameOverException();
+
             foreach (var player in Players)
             {
                 player.TakeTurn(Cup);
+                if (IsOver) break;
             }
         }
     }

@@ -16,7 +16,8 @@ namespace OODTDD
         {
             Squares = new List<Square>();
 
-            for (int i = 0; i < 36; i++)
+            Squares.Add(new GoSquare());
+            for (int i = 1; i < 36; i++)
             {
                 Squares.Add(new Square());
             }
@@ -30,7 +31,7 @@ namespace OODTDD
             for (int i = 0; i < Squares.Count; i++)
             {
                 var currentSquare = Squares[i];
-                var nextSquare = IsLastSquare(i) ? FirstSquare : Squares[i + 1];
+                var nextSquare = IsLastSquare(i) ? GoSquare : Squares[i + 1];
                 currentSquare.NextSquare = nextSquare;
             }
         }
@@ -43,9 +44,9 @@ namespace OODTDD
 
         public IList<Square> Squares { get; set; }
 
-        public Square FirstSquare
+        public GoSquare GoSquare
         {
-            get { return Squares[0]; }
+            get { return Squares[0] as GoSquare; }
         }
     }
 }

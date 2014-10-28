@@ -8,5 +8,9 @@ namespace OODTDD
     public class Square
     {
         public Square NextSquare { get; set; }
+
+        public virtual void PassOver(Player player)
+        {
+        }
     }
 }

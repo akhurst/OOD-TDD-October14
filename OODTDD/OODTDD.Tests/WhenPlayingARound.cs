@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OODTDD;
 
 namespace OODTDD.Tests
 {
@@ -14,7 +15,7 @@ namespace OODTDD.Tests
         public void GivenEachPlayerRolls2DiceThenEachPlayerMovesTheNumberOfSpacesShownOnTheDice()
         {
             var board = new Board();
-            var player = new Player("allen", board.FirstSquare);
+            var player = new Player("allen", board.GoSquare);
             var cup = new Cup(2);
 
             player.TakeTurn(cup);
@@ -38,5 +39,17 @@ namespace OODTDD.Tests
             }
         }
 
+        [Test]
+        public void GivenTheGameIsOverIGetAnException()
+        {
+            var game = new Game(4);
+
+            for (int i = 0; i < 20 && !game.IsOver; i++)
+            {
+                game.PlayRound();
+            }
+
+            Assert.Throws<GameOverException>(game.PlayRound);
+        }
     }
 }

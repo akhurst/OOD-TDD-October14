@@ -20,10 +20,21 @@ namespace OODTDD
         {
             cup.Roll();
 
+            Move(cup);
+        }
+
+        private void Move(Cup cup)
+        {
             for (int i = 0; i < cup.LastValue; i++)
             {
-                CurrentSquare = CurrentSquare.NextSquare;
+                Step();
             }
+        }
+
+        private void Step()
+        {
+            CurrentSquare = CurrentSquare.NextSquare;
+            CurrentSquare.PassOver(this);
         }
     }
 }
