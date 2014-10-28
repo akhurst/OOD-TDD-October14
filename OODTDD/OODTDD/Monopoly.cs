@@ -16,7 +16,10 @@ namespace OODTDD.Monopoly
 
             var game = new Game {Players = playerList};
 
-            var board = new Board {Squares = new LinkedList<ISquare>(Enumerable.Range(1, 36).Select(x => new GenericSquare()))};
+            var squareList = new LinkedList<ISquare>(Enumerable.Range(1, 35).Select(x => new GenericSquare()));
+            squareList.AddFirst(new GoSquare());
+
+            var board = new Board {Squares = squareList};
 
             game.Board = board;
 
