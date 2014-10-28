@@ -44,6 +44,7 @@
     <Compile Include="IRandomizer.cs" />
     <Compile Include="IRollable.cs" />
     <Compile Include="Monopoly\Board.cs" />
+    <Compile Include="Monopoly\LinkedListNodeExtensions.cs" />
     <Compile Include="Monopoly\Square.cs" />
     <Compile Include="Monopoly.cs" />
     <Compile Include="Monopoly\Game.cs" />

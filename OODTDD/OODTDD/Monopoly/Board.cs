@@ -12,12 +12,13 @@ namespace OODTDD.Monopoly
         {
             var startSquare = this.Squares.FirstOrDefault(x => x.HasToken(token));
             var currentNode = Squares.Find(startSquare);
-            startSquare.RemoveToken(token);
+
+            currentNode.Value.RemoveToken(token);
 
             var moveEvents = new List<IGameEvent>();
-
             var lastSquare = startSquare;
-            foreach (var square in GetNextSquares(startSquare, spaces))
+
+            foreach (var square in GetNextSquares(currentNode, spaces))
             {
                 moveEvents.AddRange(square.Pass(token));
                 lastSquare = square;
@@ -40,16 +41,14 @@ namespace OODTDD.Monopoly
             return this.Squares.FirstOrDefault(x => x.HasToken(token));
         }
 
-        public IEnumerable<ISquare> GetNextSquares(ISquare square, int spaces)
+        public IEnumerable<ISquare> GetNextSquares(LinkedListNode<ISquare> square, int spaces)
         {
             var squareList = new List<ISquare>();
-            var startingSquare = Squares.Find(square);
-
-            var currentNode = startingSquare;
+            LinkedListNode<ISquare> currentNode = square;
 
             for (int i = 0; i <= spaces; i++)
             {
-                currentNode = currentNode.Next;
+                currentNode = currentNode.CircularNext();
                 squareList.Add(currentNode.Value);
             }
 

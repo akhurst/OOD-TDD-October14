@@ -108,24 +108,24 @@ namespace OODTDD.Tests
         public void GameStateIsFinished()
         {
 
-            while (true)
+            while (finishedGame.GameState != GameState.Finished)
             {
-                game.TakeTurn();
+                //finishedGame.TakeTurn();
 
-                while (game.GameState != GameState.Finished)
+
+                foreach (Player p in finishedGame.Players)
                 {
-                    foreach (Player p in game.Players)
-                    {
-                        game.RollAndMove(p);
-                    }
+                    finishedGame.RollAndMove(p);
                 }
             }
 
             Assert.AreEqual(finishedGame.GameState, GameState.Finished);
+            }
+
+            
         }
 
 
     }
 
    
-}
