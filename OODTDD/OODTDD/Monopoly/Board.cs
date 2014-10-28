@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OODTDD.Monopoly
@@ -7,22 +8,26 @@ namespace OODTDD.Monopoly
     {
         public LinkedList<ISquare> Squares { get; set; }
 
-        public void MoveToken(Token token, int spaces)
+        public IEnumerable<IGameEvent> MoveToken(Token token, int spaces)
         {
             var startSquare = this.Squares.FirstOrDefault(x => x.HasToken(token));
             var currentNode = Squares.Find(startSquare);
             startSquare.RemoveToken(token);
 
+            var moveEvents = new List<IGameEvent>();
+
             var lastSquare = startSquare;
             foreach (var square in GetNextSquares(startSquare, spaces))
             {
-                square.Pass(token);
+                moveEvents.AddRange(square.Pass(token));
                 lastSquare = square;
             }
 
-            lastSquare.Land(token);
+            moveEvents.AddRange(lastSquare.Land(token));
             
             lastSquare.AddToken(token);
+
+            return moveEvents;
         }
 
         public ISquare GetStartingSquare()

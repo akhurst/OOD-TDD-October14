@@ -8,7 +8,7 @@ namespace OODTDD.Monopoly
     {
         public static Game GetGame(IEnumerable<Player> players)
         {
-            var playerList = players as IList<Player> ?? players.ToList();
+            var playerList = new LinkedList<Player>(players);
             if (playerList.Count() < 2 || playerList.Count() > 10)
             {
                 throw new ArgumentException("Too many or few players");
