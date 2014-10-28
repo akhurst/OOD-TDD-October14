@@ -22,6 +22,11 @@ namespace OODTDD
 
         public int LastValue { get; private set; }
 
+        public bool LastRollWasDoubles
+        {
+            get { return Dice.Select(d => d.LastValue).Distinct().Count() == 1; }
+        }
+
         public int Roll()
         {
             LastValue = Dice.Sum(die => die.Roll());

@@ -60,6 +60,7 @@
     <Compile Include="WhenCreatingAGame.cs" />
     <Compile Include="WhenPassingGo.cs" />
     <Compile Include="WhenPlayingARound.cs" />
+    <Compile Include="WhenRollingDoubles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

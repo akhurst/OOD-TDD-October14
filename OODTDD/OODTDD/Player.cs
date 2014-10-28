@@ -7,6 +7,8 @@ namespace OODTDD
 {
     public class Player
     {
+        private int doublesCounter = 0;
+
         public Player(string token, Square startingPosition)
         {
             Token = token;
@@ -21,6 +23,14 @@ namespace OODTDD
             cup.Roll();
 
             Move(cup);
+
+            if (cup.LastRollWasDoubles && doublesCounter < 2)
+            {
+                doublesCounter++;
+                TakeTurn(cup);
+            }
+
+            doublesCounter = 0;
         }
 
         private void Move(Cup cup)
