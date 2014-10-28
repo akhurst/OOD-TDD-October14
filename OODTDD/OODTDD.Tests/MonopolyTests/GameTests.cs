@@ -12,6 +12,7 @@ namespace OODTDD.Tests
     public class GameTests
     {
         private Game game;
+        private Game finishedGame;
         private Token horsey;
         private Token topHat;
         private Player player1;
@@ -27,6 +28,8 @@ namespace OODTDD.Tests
             this.player2 = new Player() {Token = topHat};
 
             game = MonopolyGame.GetGame(new List<Player>{player1, player2});
+
+            finishedGame = MonopolyGame.GetGame(new List<Player> {player1, player2});
         }
 
         [Test]
@@ -68,7 +71,7 @@ namespace OODTDD.Tests
         [Test]
         public void TwoPlayersTakeTheirMoves()
         {
-            var startSquare = game.Board.Squares.FirstOrDefault(x => x.HasToken(player1.Token));
+            var startSquare = game.Board
             game.RollAndMove(player1);
             //game.EndTurn(player1);
             game.RollAndMove(player2);
@@ -100,6 +103,34 @@ namespace OODTDD.Tests
 
             Assert.IsInstanceOf<Square>(square);
         }
+
+        public void CurrentPlayerRollsAndMoves()
+        {
+
+            game.RollAndMove(player1);
+
+        }
+
+        public void GameStateIsFinished()
+        {
+
+            //while (true)
+            //{
+            //var nextRound = game.TakeRound();
+
+            while (game.GameState != GameState.Finished)
+            {
+                foreach (Player p in game.Players)
+                {
+                    game.RollAndMove(p);
+                }
+            }
+
+
+            Assert.Equals(finishedGame.GameState, GameState.Finished);
+        }
+
+
     }
 
    

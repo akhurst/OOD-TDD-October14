@@ -7,8 +7,9 @@ namespace OODTDD.Monopoly
         public Board Board { get; set; }
         public IEnumerable<Player> Players { get; set; }
         private Cup cup = new Cup(2);
+        public GameState GameState;
 
-        public GameState gameState;
+        public int currentPlayerIndex;
 
         public void RollAndMove(Player player1)
         {
@@ -18,9 +19,12 @@ namespace OODTDD.Monopoly
 
             this.Board.MoveToken(player1.Token, roll);
         }
+
+
     }
 
     public enum GameState
     {
+        Finished
     }
 }
