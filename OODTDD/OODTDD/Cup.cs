@@ -10,11 +10,15 @@ namespace OODTDD
         public IList<IRollable> Dice { get; private set; }
         public Cup(int numDie)
         {
-            NumDie = numDie;
             Dice = RollableFactory.GetDie(numDie);
         }
 
-        public int NumDie { get; set; }
+        public Cup(int numDie, IRandomizer randomizer)
+        {
+            Dice = RollableFactory.GetDie(numDie, randomizer);
+        }
+
+        public int NumDie { get { return Dice.Count; } }
 
         public int LastValue { get; private set; }
 

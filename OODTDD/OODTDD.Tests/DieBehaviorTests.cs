@@ -12,7 +12,7 @@ namespace OODTDD.Tests
         [Test]
         public void ShouldRetainItsState()
         {
-            var die = new Die();
+            var die = RollableFactory.GetSingleDie();
 
             var rollResult = die.Roll();
 

@@ -7,11 +7,6 @@ namespace OODTDD
 {
     public class Die : IRollable
     {
-        public Die()
-        {
-            randomizer = new RandomAdapter();
-        }
-
         public Die(IRandomizer randomizer)
         {
             this.randomizer = randomizer;

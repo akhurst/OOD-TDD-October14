@@ -14,10 +14,11 @@ namespace OODTDD.Tests
     {
         private List<int> results;
 
+        // These are slow and potentially error prone. We are leaving them here because we have trouble letting go....
         [TestFixtureSetUp]
         public virtual void SetUp()
         {
-            var die = new Die();
+            var die = RollableFactory.GetSingleDie();
             results = die.SetUp1000000Results();
         }
 
