@@ -38,18 +38,5 @@ namespace OODTDD.Tests
                 Assert.That(() => current.CurrentSquare, Is.Not.EqualTo(startingPositions[player]));
             }
         }
-
-        [Test]
-        public void GivenTheGameIsOverIGetAnException()
-        {
-            var game = new Game(4);
-
-            for (int i = 0; i < 20 && !game.IsOver; i++)
-            {
-                game.PlayRound();
-            }
-
-            Assert.Throws<GameOverException>(game.PlayRound);
-        }
     }
 }

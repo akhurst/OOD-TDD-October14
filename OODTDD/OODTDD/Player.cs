@@ -15,8 +15,10 @@ namespace OODTDD
             CurrentSquare = startingPosition;
         }
 
+        public event EventHandler<PlayerEventArgs> BalanceUpdated; 
         public string Token { get; private set; }
         public Square CurrentSquare { get; private set; }
+        public int Balance { get; private set; }
 
         public void TakeTurn(Cup cup)
         {
@@ -45,6 +47,15 @@ namespace OODTDD
         {
             CurrentSquare = CurrentSquare.NextSquare;
             CurrentSquare.PassOver(this);
+        }
+
+        public void Credit(int amount)
+        {
+            Balance += amount;
+            if (BalanceUpdated != null)
+            {
+                BalanceUpdated(this, new PlayerEventArgs(this));
+            }
         }
     }
 }

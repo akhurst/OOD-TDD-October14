@@ -78,5 +78,13 @@ namespace OODTDD.Tests
             game.Winner.Should().BeNull();
             game.IsOver.Should().BeFalse();
         }
+
+        [Test]
+        public void ThenEveryPlayerStartsWith0Dollars()
+        {
+            var game = new Game(4);
+
+            Assert.That(game.Players.Select(p => p.Balance).Distinct().Single(), Is.EqualTo(0));
+        }
     }
 }

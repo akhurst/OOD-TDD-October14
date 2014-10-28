@@ -5,10 +5,10 @@ using System.Text;
 
 namespace OODTDD
 {
-    public class PlayerPassedEventArgs : EventArgs
+    public class PlayerEventArgs : EventArgs
     {
         public Player Player { get; private set; }
-        public PlayerPassedEventArgs(Player player)
+        public PlayerEventArgs(Player player)
         {
             Player = player;
         }

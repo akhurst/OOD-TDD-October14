@@ -7,7 +7,7 @@ namespace OODTDD
 {
     public class Game
     {
-        public Game(int numPlayers)
+        public Game(int numPlayers, Cup cup = null)
         {
             if (numPlayers > 10 || numPlayers < 2)
             {
@@ -15,13 +15,20 @@ namespace OODTDD
             }
 
             InitializeBoard();
-            InitializeDice();
+            InitializeDice(cup);
             InitializePlayers(numPlayers);
         }
 
-        private void InitializeDice()
+        private void InitializeDice(Cup cup)
         {
-            Cup = new Cup(2);
+            if (cup == null)
+            {
+                Cup = new Cup(2);
+            }
+            else
+            {
+                Cup = cup;
+            }
         }
 
         private void InitializeBoard()
@@ -30,9 +37,9 @@ namespace OODTDD
             Board.GoSquare.PlayerPassed += GoSquare_PlayerPassed;
         }
 
-        void GoSquare_PlayerPassed(object sender, PlayerPassedEventArgs e)
+        void GoSquare_PlayerPassed(object sender, PlayerEventArgs e)
         {
-            Winner = e.Player;
+            
         }
 
         private void InitializePlayers(int numPlayers)
@@ -43,6 +50,15 @@ namespace OODTDD
             {
                 var player = new Player("Player " + i, Board.GoSquare);
                 Players.Add(player);
+                player.BalanceUpdated += Player_BalanceUpdated;
+            }
+        }
+
+        private void Player_BalanceUpdated(object sender, PlayerEventArgs e)
+        {
+            if (e.Player.Balance >= 1000)
+            {
+                Winner = e.Player;
             }
         }
 
