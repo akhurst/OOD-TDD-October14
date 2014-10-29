@@ -18,11 +18,12 @@ namespace MineSweeper.Business
         public Square(Boolean isMine)
         {
             IsMine = isMine;
+            SquareState = new ConveredUnflaggedSquareState();
         }
 
         public bool IsCovered
         {
-            get { return isCovered; }
+            get { return SquareState.IsCovered; }
         }
 
         public void IncrementValue()
@@ -32,18 +33,11 @@ namespace MineSweeper.Business
 
         public void Uncover()
         {
-	        if (IsFlagged)
-	        {
-		        return;
-	        }
+            SquareState.Uncover(this);
+        }
 
-	        if (!isCovered)
-	        {
-		        return;
-	        }
-
-		    isCovered = false;
-
+        public void UncoverCoveredSquare()
+        {
             if (!IsMine)
             {
                 if (Value == 0)
@@ -57,18 +51,17 @@ namespace MineSweeper.Business
 
             if (SquareUncovered != null)
             {
-                SquareUncovered(this,new SquareUncoveredEventArgs(IsMine));
+                SquareUncovered(this, new SquareUncoveredEventArgs(IsMine));
             }
         }
 
         public void ToggleFlag()
         {
-	        if (!IsCovered) return;
-	     
-			IsFlagged = !IsFlagged; 
+	       SquareState.ToggleFlag(this);
         }
 
-        public bool IsFlagged { get; private set; }
+        public bool IsFlagged { get; set; }
+        public SquareState SquareState { get; set; }
 
         public override string ToString()
         {
