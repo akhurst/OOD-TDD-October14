@@ -228,8 +228,6 @@ namespace OODTDD.Tests
                 startingSquare.AddToken(p.Token);
             }
 
-            game.Board = board;
-
             var rollFiveDice = Substitute.For<Cup>();
             rollFiveDice.Roll().Returns(5);
             rollFiveDice.LastValue.Returns(new List<int>() { 1, 4 });
@@ -243,11 +241,7 @@ namespace OODTDD.Tests
             Assert.AreEqual(p2.Money, 4500);
 
         }
-
-            
     }
-
-        
 }
 
    
