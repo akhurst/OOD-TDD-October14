@@ -112,7 +112,7 @@ namespace MineSweeper.Business
 
         private List<Square> FindNeighbors(int i)
         {
-            bool notOnTopRow = i > cols;
+            bool notOnTopRow = i >= cols;
             bool notOnBottomRow = i < (NumberOfSquares - cols);
             bool notOnLeftSide = i % cols != 0;
             bool notOnRightSide = (i + 1) % cols != 0;
