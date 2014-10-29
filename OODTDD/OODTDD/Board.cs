@@ -15,6 +15,8 @@ namespace OODTDD
         public int GoSquareIndex{ get{ return 0; } }
         public int LuxuryTaxSquareIndex { get { return 37; } }
         public int IncomeTaxSquareIndex { get { return 4; } }
+        public int JailSquareIndex { get { return 10; } }
+        public int GoToJailSquareIndex { get { return 30; } }
 
         private void InitializeSquares()
         {
@@ -34,11 +36,19 @@ namespace OODTDD
                 {
                     Squares.Add(new LuxuryTaxSquare());
                 }
+                else if (i == GoToJailSquareIndex)
+                {
+                    Squares.Add(new GoToJailSquare());
+                }
                 else
                 {
                     Squares.Add(new Square());
                 }
             }
+
+            var goToJailSquare = Squares[GoToJailSquareIndex] as GoToJailSquare;
+            if (goToJailSquare != null)
+                goToJailSquare.JailSquare = Squares[JailSquareIndex];
 
             LinkSquares();
         }

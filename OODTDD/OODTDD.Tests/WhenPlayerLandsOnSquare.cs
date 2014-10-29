@@ -51,9 +51,28 @@ namespace OODTDD.Tests
             var numRolls = 0;
             randomizer.GetRandomNumber(1, 6).Returns(i => rolls[numRolls++]);
             player.Credit(3000);
+
             player.TakeTurn(new Cup(2, randomizer));
 
             Assert.AreEqual(2800, player.TotalDollars);
         }
+
+        [Test]
+        public void GivenPlayerLandsOnGoToJail_PlayerSentToJail()
+        {
+            var board = new Board();
+            var player = new Player("1", board.Squares[27]);
+            var randomizer = Substitute.For<IRandomizer>();
+            var rolls = new[] { 2, 1 };
+            var numRolls = 0;
+            randomizer.GetRandomNumber(1, 6).Returns(i => rolls[numRolls++]);
+
+            player.TakeTurn(new Cup(2, randomizer));
+
+            Assert.IsTrue(player.IsInJail);
+            Assert.AreEqual(board.Squares[10],player.CurrentSquare);
+        }
+
+
     }
 }

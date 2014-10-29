@@ -61,6 +61,7 @@
     <Compile Include="RollDieTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WhenCreatingAGame.cs" />
+    <Compile Include="WhenInJail.cs" />
     <Compile Include="WhenPassingGo.cs" />
     <Compile Include="WhenPlayerLandsOnSquare.cs" />
     <Compile Include="WhenPlayingARound.cs" />

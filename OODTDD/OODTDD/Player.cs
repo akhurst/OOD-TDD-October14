@@ -16,16 +16,36 @@ namespace OODTDD
         public string Token { get; private set; }
         public Square CurrentSquare { get; private set; }
         public int TotalDollars { get; private set; }
+        public bool IsInJail { get; set; }
 
         private int doublesCount;
+        private int turnsInJail;
 
         public event EventHandler<PlayerPassedEventArgs> PlayerCredited;
 
         public void TakeTurn(Cup cup)
         {
             cup.Roll();
+            if (IsInJail)
+            {
 
-            Move(cup);
+                if (cup.IsLastRollDouble)
+                {
+                    IsInJail = false;
+                    Move(cup);
+                    turnsInJail = 0;
+                }
+                else
+                {
+                    turnsInJail++;
+                }
+            }
+            else
+            {
+                Move(cup);
+            }
+            
+            
             if (doublesCount < 2 && cup.IsLastRollDouble)
             {
                 doublesCount++;
@@ -40,6 +60,11 @@ namespace OODTDD
             {
                 Step((i == cup.LastValue - 1));
             }
+        }
+
+        public void JumpTo(Square square)
+        {
+            this.CurrentSquare = square;
         }
 
         private void Step(bool isLastStep)

@@ -47,6 +47,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameOverException.cs" />
     <Compile Include="GoSquare.cs" />
+    <Compile Include="GoToJailSquare.cs" />
     <Compile Include="IncomeTaxSquare.cs" />
     <Compile Include="IRandomizer.cs" />
     <Compile Include="IRollable.cs" />
