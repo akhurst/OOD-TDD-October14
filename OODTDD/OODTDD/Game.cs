@@ -34,12 +34,6 @@ namespace OODTDD
         private void InitializeBoard()
         {
             Board = new Board();
-            Board.GoSquare.PlayerPassed += GoSquare_PlayerPassed;
-        }
-
-        void GoSquare_PlayerPassed(object sender, PlayerEventArgs e)
-        {
-            
         }
 
         private void InitializePlayers(int numPlayers)
@@ -56,7 +50,7 @@ namespace OODTDD
 
         private void Player_BalanceUpdated(object sender, PlayerEventArgs e)
         {
-            if (e.Player.Balance >= 1000)
+            if (e.Player.Balance >= 5000)
             {
                 Winner = e.Player;
             }

@@ -13,6 +13,7 @@ namespace OODTDD
         {
             Token = token;
             CurrentSquare = startingPosition;
+	        Balance = 2000;
         }
 
         public event EventHandler<PlayerEventArgs> BalanceUpdated; 
@@ -41,6 +42,7 @@ namespace OODTDD
             {
                 Step();
             }
+			CurrentSquare.LandOn(this);
         }
 
         private void Step()
@@ -57,5 +59,14 @@ namespace OODTDD
                 BalanceUpdated(this, new PlayerEventArgs(this));
             }
         }
+
+		public void Debit(int amount)
+		{
+			Balance -= amount;
+			if (BalanceUpdated != null)
+			{
+				BalanceUpdated(this, new PlayerEventArgs(this));
+			}
+		}
     }
 }

@@ -14,32 +14,11 @@ namespace OODTDD
 
         private void InitializeSquares()
         {
-            Squares = new List<Square>();
-
-            Squares.Add(new GoSquare());
-            for (int i = 1; i < 36; i++)
-            {
-                Squares.Add(new Square());
-            }
-
-            LinkSquares();
+	        Squares = SquareFactory.GetSquares(40);
         }
 
-        private void LinkSquares()
-        {
-
-            for (int i = 0; i < Squares.Count; i++)
-            {
-                var currentSquare = Squares[i];
-                var nextSquare = IsLastSquare(i) ? GoSquare : Squares[i + 1];
-                currentSquare.NextSquare = nextSquare;
-            }
-        }
-
-        private bool IsLastSquare(int i)
-        {
-            return i == (Squares.Count - 1);
-        }
+        
+        
 
 
         public IList<Square> Squares { get; set; }

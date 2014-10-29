@@ -12,5 +12,10 @@ namespace OODTDD
         public virtual void PassOver(Player player)
         {
         }
+
+		public virtual void LandOn(Player player)
+		{
+			
+		}
     }
 }

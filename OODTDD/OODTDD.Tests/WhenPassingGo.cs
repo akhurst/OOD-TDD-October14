@@ -38,11 +38,11 @@ namespace OODTDD.Tests
             }
 
             game.IsOver.Should().BeFalse();
-            game.Players.ToList().ForEach(p=>Assert.That(p.Balance, Is.EqualTo(200)));
+            game.Players.ToList().ForEach(p=>Assert.That(p.Balance, Is.EqualTo(2200)));
         }
 
         [Test]
-        public void GivenMyBalancePasses1000ThenIWinTheGame()
+        public void GivenMyBalancePasses5000ThenIWinTheGame()
         {
             // They will roll 10 each time, but not doubles
             var numRolls = 0;
@@ -50,7 +50,7 @@ namespace OODTDD.Tests
                 i => numRolls++ % 2 == 0 ? 6 : 4
                 );
 
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i < 60; i++)
             {
                 game.PlayRound();
             }

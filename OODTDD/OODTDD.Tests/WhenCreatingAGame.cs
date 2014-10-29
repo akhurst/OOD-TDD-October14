@@ -35,7 +35,7 @@ namespace OODTDD.Tests
             var game = new Game(2);
 
             game.Board.Should().NotBeNull();
-            game.Board.Squares.Should().HaveCount(36);
+            game.Board.Squares.Should().HaveCount(40);
             game.Board.Squares.Should().OnlyHaveUniqueItems();
         }
 
@@ -80,11 +80,11 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void ThenEveryPlayerStartsWith0Dollars()
+        public void ThenEveryPlayerStartsWith2000Dollars()
         {
             var game = new Game(4);
 
-            Assert.That(game.Players.Select(p => p.Balance).Distinct().Single(), Is.EqualTo(0));
+            Assert.That(game.Players.Select(p => p.Balance).Distinct().Single(), Is.EqualTo(2000));
         }
     }
 }
