@@ -12,14 +12,22 @@ namespace OODTDD
             InitializeSquares();
         }
 
+        public int GoSquareIndex{ get{ return 0; } }
+
         private void InitializeSquares()
         {
             Squares = new List<Square>();
 
-            Squares.Add(new GoSquare());
-            for (int i = 1; i < 36; i++)
+            for (int i = 0; i < 36; i++)
             {
-                Squares.Add(new Square());
+                if (i == GoSquareIndex)
+                {
+                    Squares.Add(new GoSquare());
+                }
+                else
+                {
+                    Squares.Add(new Square());
+                }
             }
 
             LinkSquares();
@@ -46,7 +54,7 @@ namespace OODTDD
 
         public GoSquare GoSquare
         {
-            get { return Squares[0] as GoSquare; }
+            get { return Squares[GoSquareIndex] as GoSquare; }
         }
     }
 }

@@ -15,12 +15,21 @@ namespace OODTDD
 
         public string Token { get; private set; }
         public Square CurrentSquare { get; private set; }
+        public int TotalDollars { get; set; }
+
+        private int doublesCount;
 
         public void TakeTurn(Cup cup)
         {
             cup.Roll();
 
             Move(cup);
+            if (doublesCount < 2 && cup.IsLastRollDouble)
+            {
+                doublesCount++;
+                TakeTurn(cup);
+            }
+            doublesCount = 0;
         }
 
         private void Move(Cup cup)

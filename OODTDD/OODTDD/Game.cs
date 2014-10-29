@@ -60,6 +60,7 @@ namespace OODTDD
             foreach (var player in Players)
             {
                 player.TakeTurn(Cup);
+                
                 if (IsOver) break;
             }
         }

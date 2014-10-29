@@ -26,5 +26,22 @@ namespace OODTDD.Tests
             game.IsOver.Should().BeTrue();
             game.Winner.Should().Be(winner);
         }
+      
+        [Test]
+        public void GivenAPlayerPassesGoThenThatPlayerReceives200Dollars()
+        {
+            //arrange
+            var board = new Board();
+            int startPosition = board.GoSquareIndex == 0 ? board.Squares.Count()-1 : board.GoSquareIndex - 1;
+            var player = new Player("1", board.Squares[startPosition]);
+            int previousBalance = player.TotalDollars;
+
+            //act
+            player.TakeTurn(new Cup(2));
+
+            //assert
+            Assert.AreEqual(previousBalance + 200, player.TotalDollars);
+        }
+
     }
 }
