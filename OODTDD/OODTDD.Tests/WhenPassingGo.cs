@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace OODTDD.Tests
@@ -11,21 +12,6 @@ namespace OODTDD.Tests
     [TestFixture]
     public class WhenPassingGo
     {
-        [Test]
-        public void GivenAPlayerPassesGoThenThatPlayerIsTheWinner()
-        {
-            var game = new Game(10);
-            Player winner = null;
-            game.Board.GoSquare.PlayerPassed += (sender, args) => winner = args.Player;
-
-            for (int i = 0; i < 20 && !game.IsOver; i++)
-            {
-                game.PlayRound();
-            }
-
-            game.IsOver.Should().BeTrue();
-            game.Winner.Should().Be(winner);
-        }
       
         [Test]
         public void GivenAPlayerPassesGoThenThatPlayerReceives200Dollars()
@@ -36,8 +22,12 @@ namespace OODTDD.Tests
             var player = new Player("1", board.Squares[startPosition]);
             int previousBalance = player.TotalDollars;
 
+            var randomizer = Substitute.For<IRandomizer>();
+            var rolls = new[] { 2, 1 };
+            var numRolls = 0;
+            randomizer.GetRandomNumber(1, 6).Returns(i => rolls[numRolls++]);
             //act
-            player.TakeTurn(new Cup(2));
+            player.TakeTurn(new Cup(2, randomizer));
 
             //assert
             Assert.AreEqual(previousBalance + 200, player.TotalDollars);

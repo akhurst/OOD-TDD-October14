@@ -9,8 +9,13 @@ namespace OODTDD
     {
         public Square NextSquare { get; set; }
 
-        public virtual void PassOver(Player player)
+        public virtual void EnterSquare(Player player)
         {
+        }
+
+        public virtual void LandOn(Player player)
+        {
+            
         }
     }
 }

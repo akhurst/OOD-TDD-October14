@@ -78,5 +78,14 @@ namespace OODTDD.Tests
             game.Winner.Should().BeNull();
             game.IsOver.Should().BeFalse();
         }
+        [Test]
+        public void ThenPlayersStartWith2000Dollars()
+        {
+            var game = new Game(2);
+            foreach (var player in game.Players)
+            {
+                Assert.That(player.TotalDollars, Is.EqualTo(2000));
+            }
+        }
     }
 }

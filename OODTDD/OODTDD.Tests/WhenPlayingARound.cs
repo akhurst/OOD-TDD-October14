@@ -43,7 +43,7 @@ namespace OODTDD.Tests
         public void GivenTheGameIsOverIGetAnException()
         {
             var game = new Game(4);
-
+            game.Players.First().Credit(2800);
             for (int i = 0; i < 20 && !game.IsOver; i++)
             {
                 game.PlayRound();

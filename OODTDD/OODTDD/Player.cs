@@ -19,6 +19,8 @@ namespace OODTDD
 
         private int doublesCount;
 
+        public event EventHandler<PlayerPassedEventArgs> PlayerCredited;
+
         public void TakeTurn(Cup cup)
         {
             cup.Roll();
@@ -36,19 +38,32 @@ namespace OODTDD
         {
             for (int i = 0; i < cup.LastValue; i++)
             {
-                Step();
+                Step((i == cup.LastValue - 1));
             }
         }
 
-        private void Step()
+        private void Step(bool isLastStep)
         {
             CurrentSquare = CurrentSquare.NextSquare;
-            CurrentSquare.PassOver(this);
+            CurrentSquare.EnterSquare(this);
+            if (isLastStep)
+            {
+                CurrentSquare.LandOn(this);
+            }
         }
 
         public void Credit(int toAdd)
         {
             TotalDollars += toAdd;
+            if (PlayerCredited != null)
+            {
+                PlayerCredited(this, new PlayerPassedEventArgs(this));
+            }
+        }
+
+        public void Debit(int toSubtract)
+        {
+            TotalDollars -= toSubtract;
         }
     }
 }

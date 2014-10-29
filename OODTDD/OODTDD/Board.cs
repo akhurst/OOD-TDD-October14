@@ -13,6 +13,8 @@ namespace OODTDD
         }
 
         public int GoSquareIndex{ get{ return 0; } }
+        public int LuxuryTaxSquareIndex { get { return 37; } }
+        public int IncomeTaxSquareIndex { get { return 4; } }
 
         private void InitializeSquares()
         {
@@ -23,6 +25,14 @@ namespace OODTDD
                 if (i == GoSquareIndex)
                 {
                     Squares.Add(new GoSquare());
+                }
+                else if (i == IncomeTaxSquareIndex)
+                {
+                    Squares.Add(new IncomeTaxSquare());
+                }
+                else if (i == LuxuryTaxSquareIndex)
+                {
+                    Squares.Add(new LuxuryTaxSquare());
                 }
                 else
                 {

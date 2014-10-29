@@ -9,9 +9,9 @@ namespace OODTDD
     {
         public event EventHandler<PlayerPassedEventArgs> PlayerPassed;
 
-        public override void PassOver(Player player)
+        public override void EnterSquare(Player player)
         {
-            base.PassOver(player);
+            base.EnterSquare(player);
             if (PlayerPassed != null)
             {
                 PlayerPassed(this, new PlayerPassedEventArgs(player));
