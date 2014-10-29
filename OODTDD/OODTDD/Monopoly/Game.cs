@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using OODTDD.Monopoly.Actions;
+using OODTDD.Monopoly.Events;
+using OODTDD.Monopoly.Squares;
 
 namespace OODTDD.Monopoly
 {
@@ -10,27 +13,18 @@ namespace OODTDD.Monopoly
         public Cup cup = new Cup(2);
         public GameState GameState;
         public LinkedListNode<Player> CurrentPlayer { get; set; }
-        private int _times;
         public IEnumerable<IWinCondition> WinConditions { get; set; } 
-        
-        public void RollAndMove(Player player1)
-        {
-            var roll = cup.Roll();
-
-            //Roll conditions
-            var events = this.Board.MoveToken(player1.Token, roll);
-
-            InvokeEvents(events);
-        }
-
+      
         private void InvokeEvents(IEnumerable<IGameEvent> events)
         {
             foreach (IGameEvent e in events)
             {
-                e.InvokeEvent(this);
+                var subEvents = e.InvokeEvent(this);
                 TestWinConditions();
                 if (GameState == GameState.Finished)
                     break;
+
+                InvokeEvents(subEvents);
             }
         }
 
@@ -42,22 +36,22 @@ namespace OODTDD.Monopoly
             }
         }
 
-        public bool PassedGo(IEnumerable<ISquare> passedSquares )
-        {
-            return passedSquares.Contains(Board.GetStartingSquare());
-        }
-
         public void TakeTurn()
         {
-            RollAndMove(CurrentPlayer.Value);
-            
-            _times++;
+            var player = this.CurrentPlayer.Value;
+            player.TimesRolledThisTurn = 0;
 
-            if (cup.LastValue.Max() == cup.LastValue.Min())
+            player.AvailableActions.Add(new RollAction(this.CurrentPlayer.Value));
+
+            while (player.GetAction() != null && this.CurrentPlayer.Value == player)
             {
-                if (_times <= 2)
-                CurrentPlayer = CurrentPlayer.CircularNext();
-                _times = 0;
+                var action = this.CurrentPlayer.Value.GetAction();
+
+                if (this.CurrentPlayer.Value.AvailableActions.Contains(action))
+                {
+                    this.CurrentPlayer.Value.AvailableActions.Remove(action);
+                    InvokeEvents(action.InvokeAction(this));
+                }
             }
         }
     }
@@ -70,10 +64,4 @@ namespace OODTDD.Monopoly
 
 
     //pay rent
-
-    public enum GameState
-    {
-        Active,
-        Finished
-    }
 }

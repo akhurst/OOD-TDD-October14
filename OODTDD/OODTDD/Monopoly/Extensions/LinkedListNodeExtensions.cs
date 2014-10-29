@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace OODTDD.Monopoly
+namespace OODTDD.Monopoly.Extensions
 {
     public static class LinkedListNodeExtensions
     {

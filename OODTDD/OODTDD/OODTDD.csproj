@@ -43,9 +43,30 @@
     <Compile Include="Die.cs" />
     <Compile Include="IRandomizer.cs" />
     <Compile Include="IRollable.cs" />
+    <Compile Include="Monopoly\Actions\AbstractAction.cs" />
     <Compile Include="Monopoly\Board.cs" />
-    <Compile Include="Monopoly\LinkedListNodeExtensions.cs" />
-    <Compile Include="Monopoly\Square.cs" />
+    <Compile Include="Monopoly\Actions\EndTurnAction.cs" />
+    <Compile Include="Monopoly\GameState.cs" />
+    <Compile Include="Monopoly\Actions\IPlayerAction.cs" />
+    <Compile Include="Monopoly\Extensions\LinkedListNodeExtensions.cs" />
+    <Compile Include="Monopoly\Events\MoveTokenEvent.cs" />
+    <Compile Include="Monopoly\Actions\RollAction.cs" />
+    <Compile Include="Monopoly\Events\RolledDoubleEvent.cs" />
+    <Compile Include="Monopoly\Events\RolledEvent.cs" />
+    <Compile Include="Monopoly\PlayerStrategies\IPlayerStrategy.cs" />
+    <Compile Include="Monopoly\PlayerStrategies\OrderOfActionsStrategy.cs" />
+    <Compile Include="Monopoly\Squares\AbstractSquare.cs" />
+    <Compile Include="Monopoly\Squares\GenericSquare.cs" />
+    <Compile Include="Monopoly\Events\GetMoneyEvent.cs" />
+    <Compile Include="Monopoly\Squares\GoSquare.cs" />
+    <Compile Include="Monopoly\Events\IGameEvent.cs" />
+    <Compile Include="Monopoly\Squares\IncomTaxSquare.cs" />
+    <Compile Include="Monopoly\Squares\ISquare.cs" />
+    <Compile Include="Monopoly\Squares\LuxuryTaxSquare.cs" />
+    <Compile Include="Monopoly\WinConditions\MoreThanOneThousandWinCondition.cs" />
+    <Compile Include="Monopoly\Events\PayIncomeTaxEvent.cs" />
+    <Compile Include="Monopoly\Events\PayRentEvent.cs" />
+    <Compile Include="Monopoly\WinConditions\IWinCondition.cs" />
     <Compile Include="Monopoly.cs" />
     <Compile Include="Monopoly\Game.cs" />
     <Compile Include="Monopoly\Player.cs" />
@@ -55,6 +76,7 @@
     <Compile Include="RandomNumberAdapter.cs" />
     <Compile Include="RollableFactory.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

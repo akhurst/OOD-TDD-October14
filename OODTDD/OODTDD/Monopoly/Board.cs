@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using OODTDD.Monopoly.Events;
+using OODTDD.Monopoly.Extensions;
+using OODTDD.Monopoly.Squares;
 
 namespace OODTDD.Monopoly
 {

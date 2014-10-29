@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using NUnit.Framework;
 using NSubstitute;
 using OODTDD.Monopoly;
+using OODTDD.Monopoly.Squares;
 
 namespace OODTDD.Tests
 {
@@ -76,9 +77,10 @@ namespace OODTDD.Tests
         public void TwoPlayersTakeTheirMoves()
         {
             var startSquare = game.Board.GetStartingSquare();
-            game.RollAndMove(player1);
-            //game.EndTurn(player1);
-            game.RollAndMove(player2);
+            
+            game.TakeTurn();
+            game.TakeTurn();
+
             //game.EndTurn(player2);
             //Finds the square that has a specified token
             var square = game.Board.Squares.FirstOrDefault(x => x.HasToken(player1.Token));
@@ -139,18 +141,11 @@ namespace OODTDD.Tests
             
             game.cup = doublesCup;
             var p = game.CurrentPlayer.Value;
+
+            //game.Board.Squares.FirstOrDefault(x => x.HasToken(p.Token));
+
             game.TakeTurn();
 
-            Assert.AreEqual(game.CurrentPlayer.Value, p);
-            game.TakeTurn();
-
-            Assert.AreEqual(game.CurrentPlayer.Value, p);
-            game.TakeTurn();
-
-            Assert.AreEqual(game.CurrentPlayer.Value, p);
-            game.TakeTurn();
-
-            Assert.AreNotEqual(game.CurrentPlayer.Value, p);
 
         }
 
