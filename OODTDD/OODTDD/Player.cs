@@ -65,6 +65,7 @@ namespace OODTDD
 			Balance -= amount;
 			if (BalanceUpdated != null)
 			{
+                //TODO: This isn't tested?
 				BalanceUpdated(this, new PlayerEventArgs(this));
 			}
 		}

@@ -64,6 +64,7 @@ namespace OODTDD
 
         public void PlayRound()
         {
+            //TODO: Test this code
             if(IsOver)
                 throw new GameOverException();
 
