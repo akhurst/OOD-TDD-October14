@@ -30,12 +30,12 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void ThenThereIsABoardWith36Squares()
+        public void ThenThereIsABoardWith40Squares()
         {
             var game = new Game(2);
 
             game.Board.Should().NotBeNull();
-            game.Board.Squares.Should().HaveCount(36);
+            game.Board.Squares.Should().HaveCount(40);
             game.Board.Squares.Should().OnlyHaveUniqueItems();
         }
 

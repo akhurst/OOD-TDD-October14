@@ -15,7 +15,7 @@ namespace OODTDD
 
         public string Token { get; private set; }
         public Square CurrentSquare { get; private set; }
-        public int TotalDollars { get; set; }
+        public int TotalDollars { get; private set; }
 
         private int doublesCount;
 
@@ -44,6 +44,11 @@ namespace OODTDD
         {
             CurrentSquare = CurrentSquare.NextSquare;
             CurrentSquare.PassOver(this);
+        }
+
+        public void Credit(int toAdd)
+        {
+            TotalDollars += toAdd;
         }
     }
 }

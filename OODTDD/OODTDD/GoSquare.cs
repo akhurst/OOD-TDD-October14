@@ -16,7 +16,7 @@ namespace OODTDD
             {
                 PlayerPassed(this, new PlayerPassedEventArgs(player));
             }
-            player.TotalDollars += 200;
+            player.Credit(200);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace OODTDD
         {
             Squares = new List<Square>();
 
-            for (int i = 0; i < 36; i++)
+            for (int i = 0; i < 40; i++)
             {
                 if (i == GoSquareIndex)
                 {
