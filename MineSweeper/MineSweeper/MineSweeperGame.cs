@@ -55,7 +55,8 @@ namespace MineSweeper.Business
 
             foreach (int minePosition in minePositions)
             {
-                Squares[minePosition] = new Square(true);
+                Squares[minePosition].MakeMine();
+
                 IncrementNeighboringSquares(minePosition);
             }
         }
@@ -92,7 +93,20 @@ namespace MineSweeper.Business
             for (int i = 0; i < NumberOfSquares; i++)
             {
                 Square square = new Square(false);
+                square.SquareUncovered += Square_SquareUncovered;
                 Squares.Add(i, square);
+            }
+        }
+
+        void Square_SquareUncovered(object sender, SquareUncoveredEventArgs e)
+        {
+            if (e.WasMine)
+            {
+                EndGame();
+            }
+            else
+            {
+                CheckForWin();
             }
         }
 

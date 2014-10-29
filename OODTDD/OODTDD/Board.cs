@@ -16,11 +16,6 @@ namespace OODTDD
         {
 	        Squares = SquareFactory.GetSquares(40);
         }
-
-        
-        
-
-
         public IList<Square> Squares { get; set; }
 
         public GoSquare GoSquare

@@ -29,7 +29,6 @@ namespace OODTDD
 			return squares;
 		}
 
-		//TODO: Refactor this
 		private static void LinkSquares(List<Square> squares)
 		{
 

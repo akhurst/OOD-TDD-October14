@@ -13,6 +13,8 @@ namespace MineSweeper.Business
 
         public List<Square> Neighbors { get; set; }
 
+        public event EventHandler<SquareUncoveredEventArgs> SquareUncovered;
+
         public Square(Boolean isMine)
         {
             IsMine = isMine;
@@ -34,11 +36,7 @@ namespace MineSweeper.Business
             {
                 isCovered = false;
 
-                if (IsMine)
-                {
-                    MineSweeperGame.Instance.EndGame();
-                }
-                else
+                if (!IsMine)
                 {
                     if (Value == 0)
                     {
@@ -47,26 +45,21 @@ namespace MineSweeper.Business
                             neighbor.Uncover();
                         }
                     }
-
-                    MineSweeperGame.Instance.CheckForWin();
                 }
 
+                if (SquareUncovered != null)
+                {
+                    SquareUncovered(this,new SquareUncoveredEventArgs(IsMine));
+                }
             }
         }
 
         public void ToggleFlag()
         {
-            // Not Implemented !!!!!!
+            IsFlagged = true;
         }
 
-        public Boolean IsFlagged
-        {
-            get
-            {
-                // Not Implemented !!!!!!
-                return false; 
-            }
-        }
+        public bool IsFlagged { get; private set; }
 
         public override string ToString()
         {
@@ -78,6 +71,10 @@ namespace MineSweeper.Business
                 return Value.ToString();
             }
         }
-        
+
+        public void MakeMine()
+        {
+            IsMine = true;
+        }
     }
 }
