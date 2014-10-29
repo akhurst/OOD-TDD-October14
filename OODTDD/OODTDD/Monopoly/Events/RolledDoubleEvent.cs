@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using OODTDD.Monopoly.Actions;
 using OODTDD.Monopoly.Squares;
 
@@ -16,12 +17,10 @@ namespace OODTDD.Monopoly.Events
         {
             if (_player.TimesRolledThisTurn == 3)
             {
-                return new List<IGameEvent>();
+                return new List<IGameEvent> { new GoToJailEvent(_player.Token, game.Board.Squares.OfType<JailSquare>().FirstOrDefault()) };
             }
 
-            _player.AvailableActions.Add(new RollAction(_player));
-
-            return new List<IGameEvent>();
+            return new List<IGameEvent>{ new AddPlayerActionsEvent(_player, new List<IPlayerAction>{ new RollAction(_player) })};
         }
     }
 }

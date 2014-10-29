@@ -59,17 +59,29 @@ namespace OODTDD.Monopoly
             return squareList;
         }
 
-        public IEnumerable<IGameEvent> MoveToSquare(Token token, ISquare square)
+        public IEnumerable<IGameEvent> MoveToSquare(Token token, ISquare square, bool jail = false)
         {
+            var moveEvents = new List<IGameEvent>();
+            if (square == null)
+                return moveEvents;
             var startSquare = this.Squares.FirstOrDefault(x => x.HasToken(token));
             var currentNode = Squares.Find(startSquare);
             
             currentNode.Value.RemoveToken(token);
-            var newSquare = Squares.Find(square);
-            newSquare.Value.AddToken(token);
 
-            var moveEvents = new List<IGameEvent>();
-            moveEvents.AddRange(newSquare.Value.Land(token));
+            while (currentNode.Value != square)
+            {
+                currentNode = currentNode.CircularNext();
+                if (!jail)
+                {
+                    currentNode.Value.Pass(token);
+                }
+            }
+            
+            currentNode.Value.AddToken(token);
+
+ 
+            moveEvents.AddRange(currentNode.Value.Land(token));
 
             return moveEvents;
         }

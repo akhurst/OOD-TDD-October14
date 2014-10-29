@@ -334,9 +334,22 @@ namespace OODTDD.Tests
             game.cup = rollFiveDice;
 
             game.TakeTurn();
-            Assert.AreEqual(game.Board.GetTokenSquare(horsey), game.Board.Squares.Find(jailSquare).Value);
+            Assert.AreEqual(game.Board.GetTokenSquare(horsey), jailSquare);
+            Assert.IsTrue(p1.PlayerInJail);
+            Assert.IsTrue(p1.TurnsPlayerInJail == 1);
 
             game.TakeTurn();
+            game.TakeTurn();
+
+            Assert.IsTrue(p1.TurnsPlayerInJail == 2);
+
+            game.TakeTurn();
+            game.TakeTurn();
+
+            Assert.IsTrue(p1.TurnsPlayerInJail == 3);
+
+
+
         }
     }
 }

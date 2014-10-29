@@ -21,8 +21,10 @@ namespace OODTDD.Monopoly.Events
         public IEnumerable<IGameEvent> InvokeEvent(Game game)
         {
             var player = game.GetPlayer(_token);
+            player.PlayerInJail = true;
+            player.TurnsPlayerInJail = 1;
 
-            return game.Board.MoveToSquare(_token, _jail);
+            return game.Board.MoveToSquare(_token, _jail, true);
         }
     }
 }

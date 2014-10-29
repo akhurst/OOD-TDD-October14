@@ -46,9 +46,11 @@
     <Compile Include="Monopoly\Actions\AbstractAction.cs" />
     <Compile Include="Monopoly\Board.cs" />
     <Compile Include="Monopoly\Actions\EndTurnAction.cs" />
+    <Compile Include="Monopoly\Events\AddPlayerActionsEvent.cs" />
     <Compile Include="Monopoly\Events\ChargeRentEvent.cs" />
     <Compile Include="Monopoly\Events\DebitMoneyEvent.cs" />
     <Compile Include="Monopoly\Events\GoToJailEvent.cs" />
+    <Compile Include="Monopoly\Events\ReleaseFromJailEvent.cs" />
     <Compile Include="Monopoly\GameState.cs" />
     <Compile Include="Monopoly\Actions\IPlayerAction.cs" />
     <Compile Include="Monopoly\Extensions\LinkedListNodeExtensions.cs" />

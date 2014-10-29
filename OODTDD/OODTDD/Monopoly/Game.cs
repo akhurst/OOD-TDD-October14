@@ -47,7 +47,18 @@ namespace OODTDD.Monopoly
             var player = this.CurrentPlayer.Value;
             player.TimesRolledThisTurn = 0;
 
-            player.AvailableActions.Add(new RollAction(this.CurrentPlayer.Value));
+            if (player.PlayerInJail)
+            {
+                player.TurnsPlayerInJail++;
+                player.AvailableActions.Add(new PayToGetOutOfJailAction(player));
+                player.AvailableActions.Add(new RollFromJailAction(player));
+            }
+            else
+            {
+                player.AvailableActions.Add(new RollAction(player));    
+            }
+            
+            //player.AvailableActions.Add(new PayForJail(this.CurrentPlayer.Value));
 
             while (player.GetAction() != null && this.CurrentPlayer.Value == player)
             {
