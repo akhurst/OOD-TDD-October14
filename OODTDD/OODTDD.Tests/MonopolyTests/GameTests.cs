@@ -348,6 +348,11 @@ namespace OODTDD.Tests
 
             Assert.IsTrue(p1.TurnsPlayerInJail == 3);
 
+            game.TakeTurn();
+            game.TakeTurn();
+
+            Assert.IsFalse(p1.PlayerInJail);
+            Assert.IsTrue(p1.TurnsPlayerInJail == 0);
 
 
         }

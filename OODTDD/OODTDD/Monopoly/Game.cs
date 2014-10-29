@@ -49,9 +49,8 @@ namespace OODTDD.Monopoly
 
             if (player.PlayerInJail)
             {
-                player.TurnsPlayerInJail++;
-                player.AvailableActions.Add(new PayToGetOutOfJailAction(player));
                 player.AvailableActions.Add(new RollFromJailAction(player));
+                player.AvailableActions.Add(new PayToGetOutOfJailAction(player));
             }
             else
             {

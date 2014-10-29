@@ -14,9 +14,11 @@ namespace OODTDD.Monopoly.Events
 
         public IEnumerable<IGameEvent> InvokeEvent(Game game)
         {
-            _player.AvailableActions.Add(new EndTurnAction(_player));
 
-            return new List<IGameEvent>();
+            return new List<IGameEvent>
+            {
+                new AddPlayerActionsEvent(_player, new List<IPlayerAction> {new EndTurnAction(_player)})
+            };
         }
     }
 }
