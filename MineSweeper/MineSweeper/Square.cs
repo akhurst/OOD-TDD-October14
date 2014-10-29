@@ -32,31 +32,40 @@ namespace MineSweeper.Business
 
         public void Uncover()
         {
-            if (isCovered)
-            {
-                isCovered = false;
+	        if (IsFlagged)
+	        {
+		        return;
+	        }
 
-                if (!IsMine)
+	        if (!isCovered)
+	        {
+		        return;
+	        }
+
+		    isCovered = false;
+
+            if (!IsMine)
+            {
+                if (Value == 0)
                 {
-                    if (Value == 0)
+                    foreach (Square neighbor in Neighbors)
                     {
-                        foreach (Square neighbor in Neighbors)
-                        {
-                            neighbor.Uncover();
-                        }
+                        neighbor.Uncover();
                     }
                 }
+            }
 
-                if (SquareUncovered != null)
-                {
-                    SquareUncovered(this,new SquareUncoveredEventArgs(IsMine));
-                }
+            if (SquareUncovered != null)
+            {
+                SquareUncovered(this,new SquareUncoveredEventArgs(IsMine));
             }
         }
 
         public void ToggleFlag()
         {
-            IsFlagged = true;
+	        if (!IsCovered) return;
+	     
+			IsFlagged = !IsFlagged; 
         }
 
         public bool IsFlagged { get; private set; }

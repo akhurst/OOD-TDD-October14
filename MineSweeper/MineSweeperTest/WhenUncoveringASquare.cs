@@ -47,6 +47,13 @@ namespace MineSweeperTest
         public void GivenTheSquareIsFlaggedThenNothingHappens()
         {
 
+			var square = new Square(false);
+			square.Neighbors = SquareTestHelpers.GenerateSquares(3);
+			square.ToggleFlag();
+			square.Uncover();
+
+
+			Assert.That(square.IsCovered, Is.True);
         }
     }
 }
