@@ -11,6 +11,8 @@ namespace OODTDD.Monopoly
         public int Money { get; set; }
         public List<IPlayerAction> AvailableActions = new List<IPlayerAction>();
         public int TimesRolledThisTurn { get; set; }
+        public bool PlayerInJail { get; set; }
+        public int TurnsPlayerInJail { get; set; }
 
         private IPlayerStrategy _playerStrategy;
 

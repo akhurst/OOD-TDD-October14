@@ -300,7 +300,7 @@ namespace OODTDD.Tests
         public void PlayerGoesToJailOnGoToJailSquare()
         {
             var p1 = new Player { Token = horsey };
-            var p2 = new Player() { Token = topHat };
+            var p2 = new Player { Token = topHat };
             
             var playerList = new LinkedList<Player>(new List<Player> { p1, p2 });
 
@@ -309,12 +309,12 @@ namespace OODTDD.Tests
 
             List<ISquare> squares = new List<ISquare>();
             squares.Add(new GoSquare());
-            foreach (var o in Enumerable.Range(1, 20))
-            {
-                squares.Add(new GoToJailSquare());
-            }
             var jailSquare = new JailSquare();
             squares.Add(jailSquare);
+            foreach (var o in Enumerable.Range(1, 20))
+            {
+                squares.Add(new GoToJailSquare(jailSquare));
+            }
 
             var squareList = new LinkedList<ISquare>(squares);
             var board = new Board { Squares = squareList };
@@ -335,6 +335,8 @@ namespace OODTDD.Tests
 
             game.TakeTurn();
             Assert.AreEqual(game.Board.GetTokenSquare(horsey), game.Board.Squares.Find(jailSquare).Value);
+
+            game.TakeTurn();
         }
     }
 }

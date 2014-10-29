@@ -10,18 +10,19 @@ namespace OODTDD.Monopoly.Events
     public class GoToJailEvent : IGameEvent
     {
         private Token _token;
+        private JailSquare _jail;
 
-        public GoToJailEvent(Token token)
+        public GoToJailEvent(Token token, JailSquare jail)
         {
             _token = token;
+            _jail = jail;
         }
 
         public IEnumerable<IGameEvent> InvokeEvent(Game game)
         {
-            var player = game.Players.FirstOrDefault(x => x.Token == _token);
-            var _square = game.Board.Squares.FirstOrDefault(x => x is JailSquare);
+            var player = game.GetPlayer(_token);
 
-            return game.Board.MoveToSquare(_token, _square);
+            return game.Board.MoveToSquare(_token, _jail);
         }
     }
 }
