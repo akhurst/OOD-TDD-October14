@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using OODTDD.Monopoly.Actions;
+using OODTDD.Monopoly.PlayerStrategies;
 
 namespace OODTDD.Monopoly
 {
@@ -11,8 +12,16 @@ namespace OODTDD.Monopoly
         public List<IPlayerAction> AvailableActions = new List<IPlayerAction>();
         public int TimesRolledThisTurn { get; set; }
 
-        private IPlayerStrategy _playerStrategy = new OrderOfActionsStrategy();
+        private IPlayerStrategy _playerStrategy;
 
+        public Player()
+        {
+            _playerStrategy =  new OrderOfActionsStrategy();
+        }
+        public Player(IPlayerStrategy strategy)
+        {
+            _playerStrategy = strategy;
+        }
 
         public IPlayerAction GetAction()
         {

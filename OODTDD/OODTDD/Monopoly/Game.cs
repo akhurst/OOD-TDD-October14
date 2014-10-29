@@ -60,6 +60,11 @@ namespace OODTDD.Monopoly
                 }
             }
         }
+
+        public Player GetPlayer(Token token)
+        {
+            return Players.FirstOrDefault(x => x.Token == token);
+        }
     }
 
 

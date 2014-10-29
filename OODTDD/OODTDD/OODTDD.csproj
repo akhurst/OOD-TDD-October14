@@ -46,6 +46,7 @@
     <Compile Include="Monopoly\Actions\AbstractAction.cs" />
     <Compile Include="Monopoly\Board.cs" />
     <Compile Include="Monopoly\Actions\EndTurnAction.cs" />
+    <Compile Include="Monopoly\Events\ChargeRentEvent.cs" />
     <Compile Include="Monopoly\Events\DebitMoneyEvent.cs" />
     <Compile Include="Monopoly\Events\GoToJailEvent.cs" />
     <Compile Include="Monopoly\GameState.cs" />
@@ -55,14 +56,19 @@
     <Compile Include="Monopoly\Actions\RollAction.cs" />
     <Compile Include="Monopoly\Events\RolledDoubleEvent.cs" />
     <Compile Include="Monopoly\Events\RolledEvent.cs" />
+    <Compile Include="Monopoly\PlayerStrategies\BuyPropertyAlwaysStrategy.cs" />
     <Compile Include="Monopoly\PlayerStrategies\IPlayerStrategy.cs" />
     <Compile Include="Monopoly\PlayerStrategies\OrderOfActionsStrategy.cs" />
     <Compile Include="Monopoly\Squares\AbstractSquare.cs" />
+    <Compile Include="Monopoly\Actions\BuyPropertyAction.cs" />
+    <Compile Include="Monopoly\Events\AvailableToBuyPropertyEvent.cs" />
     <Compile Include="Monopoly\Squares\GenericSquare.cs" />
     <Compile Include="Monopoly\Events\GetMoneyEvent.cs" />
     <Compile Include="Monopoly\Squares\GoSquare.cs" />
     <Compile Include="Monopoly\Events\IGameEvent.cs" />
     <Compile Include="Monopoly\Squares\GoToJailSquare.cs" />
+    <Compile Include="Monopoly\Squares\PropertyGrouping.cs" />
+    <Compile Include="Monopoly\Squares\PropertySquare.cs" />
     <Compile Include="Monopoly\Squares\IncomTaxSquare.cs" />
     <Compile Include="Monopoly\Squares\ISquare.cs" />
     <Compile Include="Monopoly\Squares\JailSquare.cs" />

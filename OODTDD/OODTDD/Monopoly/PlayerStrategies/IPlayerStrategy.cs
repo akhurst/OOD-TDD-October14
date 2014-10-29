@@ -3,7 +3,7 @@ using OODTDD.Monopoly.Actions;
 
 namespace OODTDD.Monopoly
 {
-    internal interface IPlayerStrategy
+    public interface IPlayerStrategy
     {
         IPlayerAction GetAction(List<IPlayerAction> availableActions);
     }

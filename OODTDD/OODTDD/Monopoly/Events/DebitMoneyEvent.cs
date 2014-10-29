@@ -19,7 +19,7 @@ namespace OODTDD.Monopoly.Events
 
         public IEnumerable<IGameEvent> InvokeEvent(Game game)
         {
-            var player = game.Players.FirstOrDefault(x => x.Token == _token);
+            var player = game.GetPlayer(_token);
 
             player.Money -= _money;
 

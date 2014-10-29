@@ -6,6 +6,7 @@ using System.Security.Authentication;
 using NUnit.Framework;
 using NSubstitute;
 using OODTDD.Monopoly;
+using OODTDD.Monopoly.PlayerStrategies;
 using OODTDD.Monopoly.Squares;
 
 namespace OODTDD.Tests
@@ -226,7 +227,81 @@ namespace OODTDD.Tests
         [Test]
         public void PlayerBuysPropertyWhenLanding()
         {
-            
+            var p1 = new Player(new BuyPropertyAlwaysStrategy()) { Token = horsey };
+            var p2 = new Player() { Token = topHat };
+
+            p1.Money = 2000;
+            p2.Money = 5000;
+
+            var playerList = new LinkedList<Player>(new List<Player> { p1, p2 });
+
+            var game = new Game { Players = playerList, };
+            game.CurrentPlayer = game.Players.First;
+
+            List<ISquare> squares = new List<ISquare>();
+            squares.Add(new GoSquare());
+            foreach (var o in Enumerable.Range(1, 40))
+            {
+                squares.Add(new PropertySquare("Property", PropertyGrouping.Default, 500, new List<int>{25, 50, 75, 100}));
+            }
+
+            var squareList = new LinkedList<ISquare>(squares);
+            var board = new Board { Squares = squareList };
+            game.Board = board;
+
+            var startingSquare = game.Board.Squares.FirstOrDefault();
+            foreach (var p in playerList)
+            {
+                startingSquare.AddToken(p.Token);
+            }
+
+            var rollFiveDice = Substitute.For<Cup>();
+            rollFiveDice.Roll().Returns(5);
+            rollFiveDice.LastValue.Returns(new List<int>() { 1, 4 });
+
+            game.cup = rollFiveDice;
+
+            game.TakeTurn();
+            Assert.AreEqual(p1.Money, 1500);
+
+            var propSquare = game.Board.GetTokenSquare(p1.Token) as PropertySquare;
+
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+
+            game.TakeTurn();
+            Assert.AreEqual(p2.Money, 4975);
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+            Assert.AreEqual(p1.Money, 1525);
+
+            game.TakeTurn();
+            Assert.AreEqual(p1.Money, 1025);
+            propSquare = game.Board.GetTokenSquare(p1.Token) as PropertySquare;
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+
+            game.TakeTurn();
+            Assert.AreEqual(p2.Money, 4925);
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+            Assert.AreEqual(p1.Money, 1075);
+
+            game.TakeTurn();
+            Assert.AreEqual(p1.Money, 575);
+            propSquare = game.Board.GetTokenSquare(p1.Token) as PropertySquare;
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+
+            game.TakeTurn();
+            Assert.AreEqual(p2.Money, 4850);
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+            Assert.AreEqual(p1.Money, 650);
+
+            game.TakeTurn();
+            Assert.AreEqual(p1.Money, 150);
+            propSquare = game.Board.GetTokenSquare(p1.Token) as PropertySquare;
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+
+            game.TakeTurn();
+            Assert.AreEqual(p2.Money, 4750);
+            Assert.AreEqual(p1.Token, propSquare.OwnedBy);
+            Assert.AreEqual(p1.Money, 250);
         }
 
         [Test]
