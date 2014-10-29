@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using OODTDD.Monopoly.Events;
@@ -56,6 +57,21 @@ namespace OODTDD.Monopoly
             }
 
             return squareList;
+        }
+
+        public IEnumerable<IGameEvent> MoveToSquare(Token token, ISquare square)
+        {
+            var startSquare = this.Squares.FirstOrDefault(x => x.HasToken(token));
+            var currentNode = Squares.Find(startSquare);
+            
+            currentNode.Value.RemoveToken(token);
+            var newSquare = Squares.Find(square);
+            newSquare.Value.AddToken(token);
+
+            var moveEvents = new List<IGameEvent>();
+            moveEvents.AddRange(newSquare.Value.Land(token));
+
+            return moveEvents;
         }
     }
 }

@@ -47,6 +47,7 @@
     <Compile Include="Monopoly\Board.cs" />
     <Compile Include="Monopoly\Actions\EndTurnAction.cs" />
     <Compile Include="Monopoly\Events\DebitMoneyEvent.cs" />
+    <Compile Include="Monopoly\Events\GoToJailEvent.cs" />
     <Compile Include="Monopoly\GameState.cs" />
     <Compile Include="Monopoly\Actions\IPlayerAction.cs" />
     <Compile Include="Monopoly\Extensions\LinkedListNodeExtensions.cs" />
@@ -61,8 +62,10 @@
     <Compile Include="Monopoly\Events\GetMoneyEvent.cs" />
     <Compile Include="Monopoly\Squares\GoSquare.cs" />
     <Compile Include="Monopoly\Events\IGameEvent.cs" />
+    <Compile Include="Monopoly\Squares\GoToJailSquare.cs" />
     <Compile Include="Monopoly\Squares\IncomTaxSquare.cs" />
     <Compile Include="Monopoly\Squares\ISquare.cs" />
+    <Compile Include="Monopoly\Squares\JailSquare.cs" />
     <Compile Include="Monopoly\Squares\LuxuryTaxSquare.cs" />
     <Compile Include="Monopoly\WinConditions\MoreThanOneThousandWinCondition.cs" />
     <Compile Include="Monopoly\Events\PayIncomeTaxEvent.cs" />

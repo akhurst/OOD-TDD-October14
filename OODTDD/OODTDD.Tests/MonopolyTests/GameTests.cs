@@ -134,7 +134,7 @@ namespace OODTDD.Tests
 
         }
         
-                [Test]
+        [Test]
         public void PlayerLandsOnLuxuryTaxAndLosesMoney()
         {
             Player player3 = new Player() { Token = wheelBarrow };
@@ -227,6 +227,47 @@ namespace OODTDD.Tests
         public void PlayerBuysPropertyWhenLanding()
         {
             
+        }
+
+        [Test]
+        public void PlayerGoesToJailOnGoToJailSquare()
+        {
+            var p1 = new Player { Token = horsey };
+            var p2 = new Player() { Token = topHat };
+            
+            var playerList = new LinkedList<Player>(new List<Player> { p1, p2 });
+
+            var game = new Game { Players = playerList, };
+            game.CurrentPlayer = game.Players.First;
+
+            List<ISquare> squares = new List<ISquare>();
+            squares.Add(new GoSquare());
+            foreach (var o in Enumerable.Range(1, 20))
+            {
+                squares.Add(new GoToJailSquare());
+            }
+            var jailSquare = new JailSquare();
+            squares.Add(jailSquare);
+
+            var squareList = new LinkedList<ISquare>(squares);
+            var board = new Board { Squares = squareList };
+            game.Board = board;
+
+            var startingSquare = game.Board.Squares.FirstOrDefault();
+            foreach (var p in playerList)
+            {
+                startingSquare.AddToken(p.Token);
+            }
+
+            // Rolling 5 will land on the GoToJail square
+            var rollFiveDice = Substitute.For<Cup>();
+            rollFiveDice.Roll().Returns(5);
+            rollFiveDice.LastValue.Returns(new List<int>() { 1, 4 });
+
+            game.cup = rollFiveDice;
+
+            game.TakeTurn();
+            Assert.AreEqual(game.Board.GetTokenSquare(horsey), game.Board.Squares.Find(jailSquare).Value);
         }
     }
 }
