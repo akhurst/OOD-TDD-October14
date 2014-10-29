@@ -16,7 +16,7 @@ namespace OODTDD.Monopoly.Actions
         {
             game.CurrentPlayer = game.CurrentPlayer.CircularNext();
 
-            return _events;
+            return base.InvokeAction(game);
         }
     }
 }

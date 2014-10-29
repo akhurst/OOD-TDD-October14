@@ -16,7 +16,7 @@ namespace OODTDD.Monopoly.Actions
 
         public virtual IEnumerable<IGameEvent> InvokeAction(Game game)
         {
-            throw new System.NotImplementedException();
+            return _events;
         }
     }
 }

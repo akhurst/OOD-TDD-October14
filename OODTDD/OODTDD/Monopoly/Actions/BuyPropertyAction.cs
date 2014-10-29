@@ -20,7 +20,9 @@ namespace OODTDD.Monopoly.Squares
         {
             int tierIndex =
                 game.Board.Squares.OfType<PropertySquare>().Count(x => x.OwnedBy == game.CurrentPlayer.Value.Token);
-            return _square.Purchase(_player, tierIndex);
+            _events.AddRange(_square.Purchase(_player, tierIndex));
+
+            return base.InvokeAction(game);
         }
     }
 }

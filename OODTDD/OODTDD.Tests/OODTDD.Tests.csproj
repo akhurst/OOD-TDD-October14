@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="DieBehaviorTests.cs" />
     <Compile Include="MonopolyTests\GameTests.cs" />
-    <Compile Include="Monopoly.cs" />
     <Compile Include="RollableTestExtensions.cs" />
     <Compile Include="RollCupTests.cs" />
     <Compile Include="RollDieTests.cs" />

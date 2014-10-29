@@ -13,13 +13,6 @@ namespace OODTDD
             randomizer = new RandomNumberAdapter();
         }
 
-        public Die(IRandomizer randomizer)
-        {
-            this.randomizer = randomizer;
-        }
-
-
-
         public int Roll()
         {
             var value = randomizer.GetRandomNumber(1, 6);

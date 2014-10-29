@@ -72,14 +72,6 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void TooFewOrTooManyPlayersThrowException()
-        {
-            Player p = new Player{ Token = new Token()};
-            Assert.Throws<ArgumentException>(() => MonopolyGame.GetGame(new List<Player>{ p }));
-            Assert.Throws<ArgumentException>(() => MonopolyGame.GetGame(new List<Player>{ p,p,p,p,p,p,p,p,p,p,p,p,p}));
-        }
-
-        [Test]
         public void TokenExistsOnOneAndOnlyOneSquare()
         {
             Assert.AreEqual(game.Board.Squares.Count(), 40);

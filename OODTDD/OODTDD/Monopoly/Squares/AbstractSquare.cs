@@ -8,6 +8,11 @@ namespace OODTDD.Monopoly.Squares
     {
         private List<Token> _tokens = new List<Token>();
 
+        public AbstractSquare()
+        {
+            Tokens = new List<Token>();
+        }
+
         public IEnumerable<Token> Tokens
         {
             get { return _tokens; }
@@ -21,7 +26,7 @@ namespace OODTDD.Monopoly.Squares
 
         public bool HasToken(Token token)
         {
-            return this._tokens.Contains(token);
+            return Tokens.Contains(token);
         }
 
         public void RemoveToken(Token token)

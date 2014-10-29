@@ -28,7 +28,7 @@ namespace OODTDD.Monopoly.Actions
             
             _events.Add(new MoveTokenEvent(_player.Token, roll));
 
-            return _events;
+            return base.InvokeAction(game);
 
             //throw new System.NotImplementedException();
         }

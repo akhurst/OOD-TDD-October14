@@ -75,7 +75,6 @@
     <Compile Include="Monopoly\Squares\LuxuryTaxSquare.cs" />
     <Compile Include="Monopoly\WinConditions\MoreThanOneThousandWinCondition.cs" />
     <Compile Include="Monopoly\Events\PayIncomeTaxEvent.cs" />
-    <Compile Include="Monopoly\Events\PayRentEvent.cs" />
     <Compile Include="Monopoly\WinConditions\IWinCondition.cs" />
     <Compile Include="Monopoly.cs" />
     <Compile Include="Monopoly\Game.cs" />
