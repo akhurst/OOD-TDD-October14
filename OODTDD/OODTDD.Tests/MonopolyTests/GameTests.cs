@@ -162,7 +162,26 @@ namespace OODTDD.Tests
             player3.Money = 200;
             player4.Money = 200;
 
-            Game gameLuxury = MonopolyGame.GetGame(new List<Player> { player3, player4 });
+            Game gameLuxury = new Game {Players = new LinkedList<Player>(new List<Player> {player3, player4})};
+
+            List<ISquare> squares = new List<ISquare>();
+            squares.Add(new GoSquare());
+            foreach (var o in Enumerable.Range(1, 20))
+            {
+                squares.Add(new LuxuryTaxSquare());
+            }
+
+            var squareList = new LinkedList<ISquare>(squares);
+            var board = new Board { Squares = squareList };
+            gameLuxury.Board = board;
+
+            var startingSquare = gameLuxury.Board.Squares.FirstOrDefault();
+            foreach (var p in gameLuxury.Players)
+            {
+                startingSquare.AddToken(p.Token);
+            }
+
+            gameLuxury.CurrentPlayer = gameLuxury.Players.First;
             gameLuxury.Board.Squares.AddFirst(new LuxuryTaxSquare());
             gameLuxury.Board.Squares.AddFirst(new LuxuryTaxSquare());
 
