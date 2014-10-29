@@ -17,6 +17,8 @@ namespace OODTDD.Tests
         private Game finishedGame;
         private Token horsey;
         private Token topHat;
+        private Token wheelBarrow;
+        private Token battleShip;
         private Player player1;
         private Player player2;
         private Cup doublesCup = new Cup(2);
@@ -26,6 +28,8 @@ namespace OODTDD.Tests
         {
             this.horsey = new Token {Name = TokenType.Horsey};
             this.topHat = new Token {Name = TokenType.TopHat};
+            this.wheelBarrow = new Token {Name = TokenType.Wheelbarrow};
+            this.battleShip = new Token { Name = TokenType.Battleship };
 
             this.player1 = new Player {Token = horsey};
             this.player2 = new Player() {Token = topHat};
@@ -149,7 +153,31 @@ namespace OODTDD.Tests
 
         }
 
-            
+        [Test]
+        public void PlayerLandsOnLuxuryTaxAndLosesMoney()
+        {
+            Player player3 = new Player() { Token = wheelBarrow };
+            Player player4 = new Player() { Token = battleShip };
+
+            player3.Money = 200;
+            player4.Money = 200;
+
+            Game gameLuxury = MonopolyGame.GetGame(new List<Player> { player3, player4 });
+            gameLuxury.Board.Squares.AddFirst(new LuxuryTaxSquare());
+            gameLuxury.Board.Squares.AddFirst(new LuxuryTaxSquare());
+
+            Cup luxuryTaxCup = Substitute.For<Cup>();
+            luxuryTaxCup.Roll().Returns(2);
+            luxuryTaxCup.LastValue.Returns(new List<int>() { 1, 1 });
+            gameLuxury.cup = doublesCup;
+
+            //var p = game.CurrentPlayer.Value;
+            game.TakeTurn();
+
+            Assert.Less(player3.Money, player4.Money);
+        }
+
+     
     }
 
         
