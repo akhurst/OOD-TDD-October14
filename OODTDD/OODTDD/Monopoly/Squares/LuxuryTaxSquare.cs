@@ -8,7 +8,10 @@ namespace OODTDD.Monopoly.Squares
     {
         public override IEnumerable<IGameEvent> Land(Token token)
         {
-            throw new NotImplementedException();
+            var events = new List<IGameEvent>();
+            events.Add(new DebitMoneyEvent(token, 75));
+
+            return events;
         }
     }
 }

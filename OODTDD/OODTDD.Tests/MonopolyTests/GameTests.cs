@@ -169,10 +169,10 @@ namespace OODTDD.Tests
             Cup luxuryTaxCup = Substitute.For<Cup>();
             luxuryTaxCup.Roll().Returns(2);
             luxuryTaxCup.LastValue.Returns(new List<int>() { 1, 1 });
-            gameLuxury.cup = doublesCup;
+            gameLuxury.cup = luxuryTaxCup;
 
             //var p = game.CurrentPlayer.Value;
-            game.TakeTurn();
+            gameLuxury.TakeTurn();
 
             Assert.Less(player3.Money, player4.Money);
         }
