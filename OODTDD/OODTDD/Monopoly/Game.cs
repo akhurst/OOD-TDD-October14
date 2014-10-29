@@ -13,7 +13,13 @@ namespace OODTDD.Monopoly
         public Cup cup = new Cup(2);
         public GameState GameState;
         public LinkedListNode<Player> CurrentPlayer { get; set; }
-        public IEnumerable<IWinCondition> WinConditions { get; set; } 
+        public IEnumerable<IWinCondition> WinConditions { get; set; }
+
+        public Game()
+        {
+            Players = new LinkedList<Player>();
+            WinConditions = new List<IWinCondition>();
+        }
       
         private void InvokeEvents(IEnumerable<IGameEvent> events)
         {

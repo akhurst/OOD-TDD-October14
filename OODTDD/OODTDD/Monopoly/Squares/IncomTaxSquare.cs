@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using OODTDD.Monopoly.Events;
 
 namespace OODTDD.Monopoly.Squares
@@ -8,7 +9,12 @@ namespace OODTDD.Monopoly.Squares
     {
         public override IEnumerable<IGameEvent> Land(Token token)
         {
-            throw new NotImplementedException();
+            var events = new List<IGameEvent>();
+            events.Add(new PayIncomeTaxEvent(token));
+
+            return events;
         }
     }
+
+ 
 }

@@ -152,8 +152,8 @@ namespace OODTDD.Tests
 
 
         }
-
-        [Test]
+        
+                [Test]
         public void PlayerLandsOnLuxuryTaxAndLosesMoney()
         {
             Player player3 = new Player() { Token = wheelBarrow };
@@ -177,7 +177,55 @@ namespace OODTDD.Tests
             Assert.Less(player3.Money, player4.Money);
         }
 
-     
+
+        [Test]
+        public void PlayerLandsOnIncomeTaxAndLosesMoney()
+        {
+            var p1 = new Player { Token = horsey };
+            var p2 = new Player() { Token = topHat };
+
+            p1.Money = 1000;
+            p2.Money = 5000;
+
+            var playerList = new LinkedList<Player>(new List<Player>{p1, p2});
+
+            var game = new Game { Players = playerList, };
+            game.CurrentPlayer = game.Players.First;
+            
+            List<ISquare> squares = new List<ISquare>();
+            squares.Add(new GoSquare());
+            foreach (var o in Enumerable.Range(1, 20))
+            {
+                squares.Add(new IncomTaxSquare());
+            }
+
+            var squareList = new LinkedList<ISquare>(squares);
+            var board = new Board { Squares = squareList };
+            game.Board = board;
+
+            var startingSquare = game.Board.Squares.FirstOrDefault();
+            foreach (var p in playerList)
+            {
+                startingSquare.AddToken(p.Token);
+            }
+
+            game.Board = board;
+
+            var rollFiveDice = Substitute.For<Cup>();
+            rollFiveDice.Roll().Returns(5);
+            rollFiveDice.LastValue.Returns(new List<int>() { 1, 4 });
+
+            game.cup = rollFiveDice;
+            
+            game.TakeTurn();
+            Assert.AreEqual(p1.Money, 800);
+
+            game.TakeTurn();
+            Assert.AreEqual(p2.Money, 4500);
+
+        }
+
+            
     }
 
         
