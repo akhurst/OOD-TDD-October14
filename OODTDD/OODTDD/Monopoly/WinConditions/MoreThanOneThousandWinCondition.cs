@@ -2,22 +2,17 @@
 
 namespace OODTDD.Monopoly.Squares
 {
-    public class MoreThanOneThousandWinCondition : IWinCondition
+    public class MoreThanMoneyWinCondition : IWinCondition
     {
-        public bool IsWinCondition(Game game)
+        private int _money;
+        public MoreThanMoneyWinCondition(int money)
         {
-            WinningPlayer = game.Players.OrderByDescending(x => x.Money).FirstOrDefault(x => x.Money >= 1000);
-            return WinningPlayer != null;
+            _money = money;
         }
 
-        public Player WinningPlayer { get; private set; }
-    }
-
-    public class MoreThanFiveThousandWinCondition : IWinCondition
-    {
         public bool IsWinCondition(Game game)
         {
-            WinningPlayer = game.Players.OrderByDescending(x => x.Money).FirstOrDefault(x => x.Money >= 5000);
+            WinningPlayer = game.Players.OrderByDescending(x => x.Money).FirstOrDefault(x => x.Money >= _money);
             return WinningPlayer != null;
         }
 

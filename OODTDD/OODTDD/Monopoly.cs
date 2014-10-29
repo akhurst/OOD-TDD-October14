@@ -19,7 +19,7 @@ namespace OODTDD.Monopoly
             var game = new Game {Players = playerList, };
             game.CurrentPlayer = game.Players.First;
 
-            game.WinConditions = new List<IWinCondition>{ new MoreThanOneThousandWinCondition()};
+            game.WinConditions = new List<IWinCondition>{ new MoreThanMoneyWinCondition(5000)};
 
             List<ISquare> squares = new List<ISquare>();
             squares.Add(new GoSquare());

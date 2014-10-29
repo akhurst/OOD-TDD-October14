@@ -77,25 +77,6 @@ namespace OODTDD.Tests
             Assert.Throws<ArgumentException>(() => MonopolyGame.GetGame(new List<Player>{ p }));
             Assert.Throws<ArgumentException>(() => MonopolyGame.GetGame(new List<Player>{ p,p,p,p,p,p,p,p,p,p,p,p,p}));
         }
-        [Test]
-        public void TwoPlayersTakeTheirMoves()
-        {
-            var startSquare = game.Board.GetStartingSquare();
-            
-            game.TakeTurn();
-            game.TakeTurn();
-
-            //game.EndTurn(player2);
-            //Finds the square that has a specified token
-            var square = game.Board.Squares.FirstOrDefault(x => x.HasToken(player1.Token));
-            var squareList = game.Board.Squares.ToList();
-            Assert.Greater(squareList.IndexOf(square), squareList.IndexOf(startSquare));
-
-            var square2 = game.Board.Squares.FirstOrDefault(x => x.HasToken(player1.Token));
-            var squareList2 = game.Board.Squares.ToList();
-            Assert.Greater(squareList.IndexOf(square2), squareList.IndexOf(startSquare));
-
-        }
 
         [Test]
         public void TokenExistsOnOneAndOnlyOneSquare()
@@ -127,14 +108,14 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void PlayersMoneyIncreasesWhenPassingGo()
+        public void PlayerHasWonTheGameWithOver5000()
         {
             while (finishedGame.GameState != GameState.Finished)
             {
                 finishedGame.TakeTurn();
             }
 
-            Assert.GreaterOrEqual(finishedGame.Players.Max(x => x.Money), 1000);
+            Assert.GreaterOrEqual(finishedGame.Players.Max(x => x.Money), 5000);
         }
 
         [Test]
@@ -240,6 +221,12 @@ namespace OODTDD.Tests
             game.TakeTurn();
             Assert.AreEqual(p2.Money, 4500);
 
+        }
+
+        [Test]
+        public void PlayerBuysPropertyWhenLanding()
+        {
+            
         }
     }
 }
