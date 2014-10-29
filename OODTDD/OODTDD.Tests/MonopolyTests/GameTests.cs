@@ -38,9 +38,9 @@ namespace OODTDD.Tests
         }
 
         [Test]
-        public void CreateGameWith36Squares()
+        public void CreateGameWith40Squares()
         {
-            Assert.AreEqual(game.Board.Squares.Count(), 36);
+            Assert.AreEqual(game.Board.Squares.Count(), 40);
         }
 
         [Test]
@@ -96,7 +96,7 @@ namespace OODTDD.Tests
         [Test]
         public void TokenExistsOnOneAndOnlyOneSquare()
         {
-            Assert.AreEqual(game.Board.Squares.Count(), 36);
+            Assert.AreEqual(game.Board.Squares.Count(), 40);
 
             Assert.IsNotNull(game.Board.Squares.SingleOrDefault(x => x.HasToken(horsey)));
         }

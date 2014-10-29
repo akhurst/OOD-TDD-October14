@@ -23,7 +23,7 @@ namespace OODTDD.Monopoly
 
             List<ISquare> squares = new List<ISquare>();
             squares.Add(new GoSquare());
-            foreach (var o in Enumerable.Range(1, 35))
+            foreach (var o in Enumerable.Range(1, 39))
             {
                 squares.Add(new GenericSquare());
             }
